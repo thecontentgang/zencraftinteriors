@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,31 @@ const ContactPage: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Advanced Observer tracking our layout reveals
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    const revealElements = document.querySelectorAll('.reveal-group');
+    revealElements.forEach((el) => observer.observe(el));
+
+    // Instantly trigger header arrival profiles
+    setTimeout(() => {
+      document.querySelector('.hero-reveal')?.classList.add('is-revealed');
+    }, 100);
+
+    return () => observer.disconnect();
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -21,7 +46,7 @@ const ContactPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
+    
     setTimeout(() => {
       alert("Thank you for your inquiry. Our team will contact you within 24 hours.");
       setIsSubmitting(false);
@@ -30,24 +55,88 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-hidden pt-32 pb-20 px-4 sm:px-6 lg:px-8 z-10">
+    <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-hidden pt-32 pb-20 px-4 sm:px-6 lg:px-8 z-10 selection:bg-sand selection:text-primary">
       
+      {/* --- BUTTERY SCROLL ANIMATION CSS --- */}
+      <style>{`
+        /* Boundary clipping wrapper */
+        .clip-mask {
+          overflow: hidden;
+          padding-bottom: 0.15em;
+        }
+
+        /* Fluid upward shift for typography layers */
+        .slide-up-text {
+          transform: translateY(110%);
+          opacity: 0;
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+        }
+        .is-revealed .slide-up-text {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        /* Structural translation mapping for panels & cards */
+        .slide-up-fade {
+          transform: translateY(40px);
+          opacity: 0;
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out;
+        }
+        .is-revealed .slide-up-fade {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        /* Image mask scaling profiles */
+        .image-wrapper {
+          transform: translateY(40px);
+          opacity: 0;
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+        }
+        .image-inner {
+          transform: scale(1.15);
+          transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .is-revealed .image-wrapper {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        .is-revealed .image-inner {
+          transform: scale(1);
+        }
+
+        .ease-buttery {
+          transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+      `}</style>
+
       {/* --- AMBIENT BACKGROUND GLOW --- */}
       <div className="absolute top-0 right-0 w-full max-w-4xl h-128 bg-secondary/5 blur-[150px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto w-full">
         
         {/* --- PAGE HEADER --- */}
-        <div className="flex flex-col items-start mb-16 md:mb-24 animate-fade-in-up">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="w-8 md:w-12 h-px bg-secondary" />
-            <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-secondary">
-              Get in Touch
-            </span>
+        <div className="flex flex-col items-start mb-16 md:mb-24 hero-reveal">
+          <div className="clip-mask mb-6">
+            <div className="flex items-center gap-4 slide-up-text" style={{ transitionDelay: '0s' }}>
+              <span className="w-8 md:w-12 h-px bg-secondary" />
+              <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-secondary">
+                Get in Touch
+              </span>
+            </div>
           </div>
+          
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-karlen text-white leading-[1.05] tracking-tight max-w-4xl">
-            Let's bring your <br />
-            <span className="text-sand italic font-light">vision to life.</span>
+            <div className="clip-mask">
+              <span className="slide-up-text block" style={{ transitionDelay: '0.1s' }}>
+                Let's bring your
+              </span>
+            </div>
+            <div className="clip-mask">
+              <span className="slide-up-text text-sand italic font-light block" style={{ transitionDelay: '0.2s' }}>
+                vision to life.
+              </span>
+            </div>
           </h1>
         </div>
 
@@ -55,13 +144,13 @@ const ContactPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
           {/* --- LEFT COLUMN: INFO & IMAGE --- */}
-          <div className="lg:col-span-5 flex flex-col h-full animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <div className="reveal-group lg:col-span-5 flex flex-col h-full">
             
             {/* Contact Details */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-10 mb-12">
               
               {/* Studio Address */}
-              <div>
+              <div className="slide-up-fade" style={{ transitionDelay: '0s' }}>
                 <h3 className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-3">
                   The Studio
                 </h3>
@@ -76,7 +165,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               {/* Direct Lines */}
-              <div>
+              <div className="slide-up-fade" style={{ transitionDelay: '0.1s' }}>
                 <h3 className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-3">
                   Direct Lines
                 </h3>
@@ -93,11 +182,14 @@ const ContactPage: React.FC = () => {
             </div>
 
             {/* Editorial Image */}
-            <div className="relative w-full flex-grow min-h-[300px] lg:min-h-[400px] rounded-4xl overflow-hidden shadow-2xl mt-auto hidden sm:block">
+            <div 
+              className="image-wrapper relative w-full flex-grow min-h-[300px] lg:min-h-[400px] rounded-4xl overflow-hidden shadow-2xl mt-auto hidden sm:block"
+              style={{ transitionDelay: '0.2s' }}
+            >
               <img 
                 src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000&auto=format&fit=crop" 
                 alt="Zencraft Studio Materials" 
-                className="w-full h-full object-cover grayscale-20 hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
+                className="image-inner w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-[transform,filter] duration-700"
               />
               <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(27,27,29,0.5)] pointer-events-none" />
             </div>
@@ -105,8 +197,8 @@ const ContactPage: React.FC = () => {
           </div>
 
           {/* --- RIGHT COLUMN: CONTACT FORM --- */}
-          <div className="lg:col-span-7 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <div className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-4xl p-6 sm:p-10 md:p-12 shadow-2xl">
+          <div className="reveal-group lg:col-span-7">
+            <div className="slide-up-fade w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-4xl p-6 sm:p-10 md:p-12 shadow-2xl transition-all duration-700 ease-buttery hover:border-white/20" style={{ transitionDelay: '0.1s' }}>
               
               <div className="mb-8 md:mb-10">
                 <h2 className="text-2xl md:text-3xl font-karlen text-white mb-2">Send an Inquiry</h2>
@@ -176,7 +268,6 @@ const ContactPage: React.FC = () => {
                     <label htmlFor="inquiryType" className="absolute left-0 -top-5 text-[10px] md:text-xs uppercase tracking-widest text-secondary transition-all">
                       Subject
                     </label>
-                    {/* Custom Dropdown Arrow */}
                     <svg className="absolute right-0 top-1 w-4 h-4 text-white/40 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
@@ -201,7 +292,7 @@ const ContactPage: React.FC = () => {
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full md:w-auto px-10 py-4 bg-secondary text-primary text-[10px] md:text-xs font-bold tracking-widest uppercase rounded-full hover:bg-white transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full md:w-auto px-10 py-4 bg-secondary text-primary text-[10px] md:text-xs font-bold tracking-widest uppercase rounded-full hover:bg-white transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer active:scale-95 ease-buttery"
                   >
                     {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
                   </button>

@@ -48,10 +48,10 @@ const BlogsPage: React.FC = () => {
     }
   ];
 
-  // Separate the latest post for the featured hero section
   const featuredPost = posts[0];
   const gridPosts = posts.slice(1);
 
+  // Advanced intersection observer mapping
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -62,11 +62,16 @@ const BlogsPage: React.FC = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -8% 0px' }
     );
 
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const revealElements = document.querySelectorAll('.reveal-group');
     revealElements.forEach((el) => observer.observe(el));
+
+    // Force hero entry properties
+    setTimeout(() => {
+      document.querySelector('.hero-reveal')?.classList.add('is-revealed');
+    }, 100);
 
     return () => observer.disconnect();
   }, []);
@@ -74,17 +79,54 @@ const BlogsPage: React.FC = () => {
   return (
     <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-x-hidden selection:bg-sand selection:text-primary z-10 pt-24 pb-32">
       
-      {/* --- INLINE ANIMATIONS --- */}
+      {/* --- BUTTERY SCROLL ANIMATION CSS --- */}
       <style>{`
-        .reveal-on-scroll {
+        /* Boundary clipping wrapper */
+        .clip-mask {
+          overflow: hidden;
+          padding-bottom: 0.15em;
+        }
+
+        /* Fluid upward transition for typographical elements */
+        .slide-up-text {
+          transform: translateY(110%);
           opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
         }
-        .reveal-on-scroll.is-revealed {
-          opacity: 1;
+        .is-revealed .slide-up-text {
           transform: translateY(0);
+          opacity: 1;
         }
+
+        /* Basic drift mapping profiles for secondary nodes */
+        .slide-up-fade {
+          transform: translateY(40px);
+          opacity: 0;
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out;
+        }
+        .is-revealed .slide-up-fade {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        /* Image mask bounding profiles */
+        .image-wrapper {
+          transform: translateY(40px);
+          opacity: 0;
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+        }
+        .image-inner {
+          transform: scale(1.15);
+          transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .is-revealed .image-wrapper {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        .is-revealed .image-inner {
+          transform: scale(1);
+        }
+
         .ease-buttery {
           transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -96,36 +138,42 @@ const BlogsPage: React.FC = () => {
       <div className="max-w-[90rem] mx-auto w-full px-4 sm:px-6 lg:px-12">
         
         {/* --- HEADER --- */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 reveal-on-scroll">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 hero-reveal">
           <div>
-           
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-karlen text-white leading-[0.9] tracking-tight">
-              The <span className="text-sand italic font-light">Journal.</span>
+              <div className="clip-mask">
+                <span className="slide-up-text block">The</span>
+              </div>
+              <div className="clip-mask">
+                <span className="slide-up-text text-sand italic font-light block">Journal.</span>
+              </div>
             </h1>
           </div>
-          <p className="text-sm text-white/50 max-w-xs font-light leading-relaxed mb-2">
-            Exploring the intersection of materiality, light, and modern architectural philosophy.
-          </p>
+          <div className="clip-mask mb-2">
+            <p className="slide-up-text text-sm text-white/50 max-w-xs font-light leading-relaxed" style={{ transitionDelay: '0.2s' }}>
+              Exploring the intersection of materiality, light, and modern architectural philosophy.
+            </p>
+          </div>
         </div>
 
-        
+        {/* --- REVEAL TARGETED HERO ARTICLE --- */}
         <a 
           href={`/blogs/${featuredPost.id}`} 
-          className="group block relative w-full h-[60vh] md:h-[75vh] rounded-[2rem] overflow-hidden mb-8 md:mb-12 reveal-on-scroll shadow-2xl"
+          className="reveal-group group block relative w-full h-[60vh] md:h-[75vh] rounded-[2rem] overflow-hidden mb-8 md:mb-12 shadow-2xl"
         >
-          {/* Background Image */}
-          <div className="absolute inset-0 w-full h-full">
+          {/* Background Image Anchor */}
+          <div className="image-wrapper absolute inset-0 w-full h-full" style={{ transitionDelay: '0s' }}>
             <img 
               src={featuredPost.image} 
               alt={featuredPost.title}
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-buttery"
+              className="image-inner w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-buttery"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
           </div>
 
-          {/* Content Overlay */}
-          <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 flex flex-col justify-end">
-            <div className="flex items-center gap-4 mb-4 md:mb-6">
+          {/* Content Overlay Panel */}
+          <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 flex flex-col justify-end z-10">
+            <div className="slide-up-fade flex items-center gap-4 mb-4 md:mb-6" style={{ transitionDelay: '0.1s' }}>
               <span className="bg-secondary text-primary text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">
                 {featuredPost.category}
               </span>
@@ -133,16 +181,17 @@ const BlogsPage: React.FC = () => {
                 {featuredPost.date}
               </span>
             </div>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-white leading-[1.1] max-w-4xl group-hover:text-sand transition-colors duration-500">
-              {featuredPost.title}
-            </h2>
+            <div className="clip-mask">
+              <h2 className="slide-up-text text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-white leading-[1.1] max-w-4xl group-hover:text-sand transition-colors duration-500" style={{ transitionDelay: '0.2s' }}>
+                {featuredPost.title}
+              </h2>
+            </div>
           </div>
         </a>
 
         {/* --- ASYMMETRICAL GRID FOR REMAINING POSTS --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-12">
           {gridPosts.map((post, index) => {
-            // Create a staggered masonry feel using col-span
             const isWide = index === 0 || index === 3; 
             const colSpanClass = isWide ? 'lg:col-span-7' : 'lg:col-span-5';
 
@@ -150,18 +199,17 @@ const BlogsPage: React.FC = () => {
               <a
                 key={post.id}
                 href={`/blogs/${post.id}`}
-                className={`group flex flex-col reveal-on-scroll ${colSpanClass}`}
-                style={{ transitionDelay: `${index * 0.1}s` }}
+                className={`reveal-group group flex flex-col ${colSpanClass}`}
               >
-                <div className="relative w-full aspect-[4/3] rounded-[1.5rem] overflow-hidden mb-6">
+                <div className="image-wrapper relative w-full aspect-[4/3] rounded-[1.5rem] overflow-hidden mb-6" style={{ transitionDelay: '0s' }}>
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-buttery"
+                    className="image-inner absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-buttery"
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                   
-                  <div className="absolute top-4 left-4">
+                  <div className="absolute top-4 left-4 z-10 slide-up-fade" style={{ transitionDelay: '0.2s' }}>
                     <span className="bg-primary/80 backdrop-blur-md text-white text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-white/10">
                       {post.category}
                     </span>
@@ -169,13 +217,18 @@ const BlogsPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col flex-grow pr-4">
-                  <span className="text-xs font-light text-white/40 mb-3">
-                    {post.date}
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-karlen text-white/90 group-hover:text-white leading-tight mb-4 transition-colors duration-500">
-                    {post.title}
-                  </h3>
-                  <div className="mt-auto pt-2 flex items-center gap-3 text-secondary text-[10px] font-bold tracking-[0.2em] uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-buttery">
+                  <div className="clip-mask mb-3">
+                    <span className="slide-up-text block text-xs font-light text-white/40" style={{ transitionDelay: '0.1s' }}>
+                      {post.date}
+                    </span>
+                  </div>
+                  <div className="clip-mask mb-4">
+                    <h3 className="slide-up-text text-2xl md:text-3xl font-karlen text-white/90 group-hover:text-white leading-tight transition-colors duration-500" style={{ transitionDelay: '0.2s' }}>
+                      {post.title}
+                    </h3>
+                  </div>
+                  
+                  <div className="mt-auto pt-2 flex items-center gap-3 text-secondary text-[10px] font-bold tracking-[0.2em] uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-buttery slide-up-fade" style={{ transitionDelay: '0.3s' }}>
                     <span className="w-6 h-px bg-secondary" />
                     Read Article
                   </div>
@@ -185,9 +238,9 @@ const BlogsPage: React.FC = () => {
           })}
         </div>
 
-        
-        <div className="mt-24 flex justify-center reveal-on-scroll">
-          <button className="group flex items-center gap-6 text-[10px] md:text-xs font-bold tracking-widest uppercase text-white hover:text-secondary transition-colors duration-500 ease-buttery px-8 py-4 rounded-full border border-white/20 hover:border-secondary/50">
+        {/* --- LOAD MORE ENTRY PORTAL --- */}
+        <div className="reveal-group mt-24 flex justify-center">
+          <button className="slide-up-fade group flex items-center gap-6 text-[10px] md:text-xs font-bold tracking-widest uppercase text-white hover:text-secondary transition-colors duration-500 ease-buttery px-8 py-4 rounded-full border border-white/20 hover:border-secondary/50" style={{ transitionDelay: '0s' }}>
             Load More Entries
           </button>
         </div>
