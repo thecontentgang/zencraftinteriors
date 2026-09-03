@@ -1,51 +1,58 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useModal } from '../components/ModalContext';
+import { Link } from 'react-router-dom';
+import { useModal } from '../components/ModalContext'; 
 
 const ProjectsPage: React.FC = () => {
   const { openModal } = useModal(); 
   
+  // 7 Projects mapped to your local assets
   const projects = [
     {
       id: '01',
-      title: 'The Glasshouse Retreat',
+      title: 'Sumith',
       category: 'Residential',
-      location: 'Jubilee Hills, Hyderabad',
-      year: '2025',
-      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop',
+      image: '/src/assets/sumith-AZ/sumith-img-1.webp',
       layout: 'full', 
     },
     {
-      id: '02',
-      title: 'Aura Executive Suites',
-      category: 'Commercial',
-      location: 'Financial District',
-      year: '2024',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop',
-      layout: 'right', 
-    },
-    {
       id: '03',
-      title: 'Villa Serenity',
+      title: 'Prudhvi- Bollineni Bion',
       category: 'Residential',
-      location: 'Banjara Hills',
-      year: '2024',
-      image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop',
+      image: '/src/assets/prudhvi-bion/prudhvi-img-1.webp',
       layout: 'left', 
     },
     {
       id: '04',
-      title: 'The Artisan Penthouse',
+      title: 'Praveen',
       category: 'Residential',
-      location: 'Hitec City',
-      year: '2023',
-      image: 'https://images.unsplash.com/photo-1600210491369-e753d80a41f3?q=80&w=2000&auto=format&fit=crop',
+      image: '/src/assets/praveen-VRE/praveen-img-1.webp',
+      layout: 'full',
+    },
+    {
+      id: '05',
+      title: 'Dharmateja',
+      category: 'Residential',
+      image: '/src/assets/dharmateja/dharmateja-img-1.webp',
+      layout: 'right',
+    },
+    {
+      id: '06',
+      title: 'Bharani',
+      category: 'Residential',
+      image: '/src/assets/bharani/bharani-img-1.webp',
+      layout: 'left',
+    },
+    {
+      id: '07',
+      title: 'Ramakrishna',
+      category: 'Residential',
+      image: '/src/assets/ramakrishna/ramakrishna-img-1.webp',
       layout: 'full',
     }
   ];
 
-  // Advanced Observer targeting the 'reveal-group' wrappers
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -62,7 +69,6 @@ const ProjectsPage: React.FC = () => {
     const revealElements = document.querySelectorAll('.reveal-group');
     revealElements.forEach((el) => observer.observe(el));
 
-    // Force hero reveal immediately on mount
     setTimeout(() => {
       document.querySelector('.hero-reveal')?.classList.add('is-revealed');
     }, 100);
@@ -73,66 +79,25 @@ const ProjectsPage: React.FC = () => {
   return (
     <main className="relative min-h-screen w-full bg-[var(--color-primary)] font-body text-white overflow-hidden pt-32 pb-32 px-4 sm:px-6 lg:px-12 z-10 selection:bg-[var(--color-secondary)] selection:text-[var(--color-primary)]">
       
-      {/* --- BUTTERY SCROLL ANIMATION CSS --- */}
       <style>{`
-        /* Text Masking */
-        .clip-mask {
-          overflow: hidden;
-          padding-bottom: 0.15em;
-        }
-        .slide-up-text {
-          transform: translateY(110%);
-          opacity: 0;
-          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
-        }
-        .is-revealed .slide-up-text {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        /* General Fade/Float */
-        .slide-up-fade {
-          transform: translateY(40px);
-          opacity: 0;
-          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out;
-        }
-        .is-revealed .slide-up-fade {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        /* Cinematic Image Reveal */
-        .image-wrapper {
-          transform: translateY(50px);
-          opacity: 0;
-          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out;
-        }
-        .image-inner {
-          transform: scale(1.15);
-          transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .is-revealed .image-wrapper {
-          transform: translateY(0);
-          opacity: 1;
-        }
-        .is-revealed .image-inner {
-          transform: scale(1);
-        }
-
-        /* Reusable buttery easing */
-        .ease-buttery {
-          transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .clip-mask { overflow: hidden; padding-bottom: 0.15em; }
+        .slide-up-text { transform: translateY(110%); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out; }
+        .is-revealed .slide-up-text { transform: translateY(0); opacity: 1; }
+        .slide-up-fade { transform: translateY(40px); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out; }
+        .is-revealed .slide-up-fade { transform: translateY(0); opacity: 1; }
+        .image-wrapper { transform: translateY(50px); opacity: 0; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out; }
+        .image-inner { transform: scale(1.15); transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .is-revealed .image-wrapper { transform: translateY(0); opacity: 1; }
+        .is-revealed .image-inner { transform: scale(1); }
+        .ease-buttery { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
       `}</style>
 
-      {/* --- AMBIENT GLOW --- */}
       <div className="absolute top-0 left-0 w-full max-w-3xl h-128 bg-[var(--color-secondary)]/5 blur-[150px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-[90rem] mx-auto w-full">
         
-        {/* --- PAGE HEADER (Staggered Editorial Layout) --- */}
+        {/* PAGE HEADER */}
         <div className="flex flex-col mb-24 md:mb-40 pt-10 hero-reveal">
-          
           <div className="w-full mb-12 md:mb-16">
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-karlen text-white leading-[0.95] tracking-tight flex flex-col">
               <div className="clip-mask block">
@@ -148,7 +113,6 @@ const ProjectsPage: React.FC = () => {
             </h1>
           </div>
           
-          {/* Descriptive Paragraph */}
           <div className="w-full flex justify-end">
             <div className="max-w-md border-l-[1.5px] border-[var(--color-secondary)]/30 pl-6 py-1 slide-up-fade" style={{ transitionDelay: '0.4s' }}>
               <p className="text-sm md:text-base text-white/60 font-light leading-relaxed">
@@ -156,13 +120,11 @@ const ProjectsPage: React.FC = () => {
               </p>
             </div>
           </div>
-
         </div>
 
-        {/* --- STAGGERED EDITORIAL PROJECT LIST --- */}
-        <div className="flex flex-col gap-32 md:gap-48">
+        {/* PROJECT LIST */}
+        <div className="flex flex-col gap-24 md:gap-32">
           {projects.map((project) => {
-            
             let layoutClasses = "w-full";
             let aspectRatio = "aspect-[16/9] md:aspect-[21/9]";
             
@@ -175,81 +137,53 @@ const ProjectsPage: React.FC = () => {
             }
 
             return (
-              <a 
+              <Link 
                 key={project.id} 
-                href={`/projects/${project.id}`}
+                to={`/projects/${project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
                 className={`reveal-group group flex flex-col ${layoutClasses}`}
               >
-                
-                {/* 1. Massive Image Container */}
-                <div 
-                  className={`image-wrapper relative w-full ${aspectRatio} overflow-hidden rounded-2xl md:rounded-3xl mb-6 md:mb-8`}
-                  style={{ transitionDelay: '0s' }}
-                >
+                {/* 1. Image Container with Text Overlay */}
+                <div className={`image-wrapper relative w-full ${aspectRatio} overflow-hidden rounded-2xl md:rounded-3xl`} style={{ transitionDelay: '0s' }}>
+                  
+                  {/* Background Image */}
                   <img 
                     src={project.image} 
                     alt={project.title} 
                     className="image-inner w-full h-full object-cover group-hover:scale-105 transition-[transform,filter] duration-1000 ease-buttery"
                   />
-                  {/* Subtle dark overlay that lifts on hover */}
-                  <div className="absolute inset-0 bg-[var(--color-primary)]/20 group-hover:bg-transparent transition-colors duration-1000 ease-buttery pointer-events-none" />
-                </div>
-
-                {/* 2. Crisp, Minimal Metadata Below Image */}
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 w-full border-t border-white/10 pt-6">
                   
-                  {/* Title & Category */}
-                  <div>
+                  {/* General Dark Tint (Optional, fades out on hover) */}
+                  <div className="absolute inset-0 bg-[var(--color-primary)]/10 group-hover:bg-transparent transition-colors duration-1000 ease-buttery pointer-events-none z-0" />
+
+                  {/* Dark Gradient Overlay strictly at the bottom for text readability */}
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none z-10 transition-opacity duration-1000 ease-buttery group-hover:opacity-90" />
+
+                  {/* Text Content Overlay */}
+                  <div className="absolute bottom-0 left-0 w-full p-6 md:p-10 z-20 flex flex-col justify-end">
+                    
+                    {/* Category Label (Yellow) */}
                     <div className="clip-mask mb-2">
-                      <h2 className="slide-up-text text-3xl md:text-4xl font-karlen text-white group-hover:text-[var(--color-secondary)] transition-colors duration-500 ease-buttery" style={{ transitionDelay: '0.1s' }}>
+                      <p className="slide-up-text text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-secondary)] drop-shadow-md" style={{ transitionDelay: '0.1s' }}>
+                        {project.category}
+                      </p>
+                    </div>
+
+                    {/* Project Title (White, turns Yellow on hover) */}
+                    <div className="clip-mask">
+                      <h2 className="slide-up-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-karlen text-white group-hover:text-[var(--color-secondary)] transition-colors duration-500 ease-buttery drop-shadow-lg" style={{ transitionDelay: '0.2s' }}>
                         {project.title}
                       </h2>
                     </div>
-                    <div className="clip-mask">
-                      <p className="slide-up-text text-xs md:text-sm text-white/50 font-light tracking-wide" style={{ transitionDelay: '0.2s' }}>
-                        {project.category} — {project.location}
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* Year & Number */}
-                  <div className="flex items-center md:items-start gap-8 md:gap-16">
-                    <div className="text-left md:text-right">
-                      <div className="clip-mask mb-1">
-                        <span className="slide-up-text block text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-secondary)]" style={{ transitionDelay: '0.1s' }}>
-                          Year
-                        </span>
-                      </div>
-                      <div className="clip-mask">
-                        <span className="slide-up-text block text-sm md:text-base text-white/80 font-body" style={{ transitionDelay: '0.2s' }}>
-                          {project.year}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <div className="text-right">
-                      <div className="clip-mask mb-1">
-                        <span className="slide-up-text block text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-secondary)]" style={{ transitionDelay: '0.2s' }}>
-                          No.
-                        </span>
-                      </div>
-                      <div className="clip-mask">
-                        <span className="slide-up-text block text-sm md:text-base text-white/80 font-body" style={{ transitionDelay: '0.3s' }}>
-                          {project.id}
-                        </span>
-                      </div>
-                    </div>
                   </div>
-
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>
 
-        {/* --- 3. BOTTOM CTA WITH MODAL --- */}
+        {/* BOTTOM CTA */}
         <div className="reveal-group mt-40 md:mt-56 flex flex-col items-center justify-center text-center">
-          
           <div className="slide-up-fade w-12 h-px bg-[var(--color-secondary)]/50 mb-8 block" style={{ transitionDelay: '0s' }} />
           
           <div className="clip-mask mb-6">
@@ -274,7 +208,6 @@ const ProjectsPage: React.FC = () => {
               Start Your Project
             </button>
           </div>
-
         </div>
 
       </div>

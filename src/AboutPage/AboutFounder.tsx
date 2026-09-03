@@ -10,7 +10,7 @@ const AboutFounder: React.FC = () => {
           {/* Professional Founder Portrait Placeholder */}
           <img 
             src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1000&auto=format&fit=crop" 
-            alt="Karthik Sai - Founder of Zencraft" 
+            alt="MD. Sharifuddin - Founder of Zencraft" 
             className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
           />
           {/* Subtle inner border to ground the image */}
@@ -32,7 +32,7 @@ const AboutFounder: React.FC = () => {
 
           {/* Names & Titles */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-karlen mb-2">
-            Karthik Sai
+            MD.Sharifuddin
           </h2>
           <p className="text-[var(--color-sand)] text-xs md:text-sm font-bold tracking-widest uppercase mb-8">
             Founder & Principal Designer

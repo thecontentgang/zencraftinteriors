@@ -73,7 +73,7 @@ const AboutPhilosophy: React.FC = () => {
               />
             </div>
             <div>
-              <h4 className="text-white font-karlen text-lg tracking-wide">Karthik Sai</h4>
+              <h4 className="text-white font-karlen text-lg tracking-wide">MD.Sharifuddin</h4>
               <p className="text-[10px] tracking-widest uppercase text-[var(--color-secondary)] font-bold mt-1">
                 Founder & Lead Designer
               </p>

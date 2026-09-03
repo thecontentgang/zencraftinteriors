@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import HeroSection from '../HomePage/HeroSection';
 import AboutSection from '../HomePage/AboutSection';
 import ProjectsSection from '../HomePage/ProjectsSection';
 import ServicesSection from '../HomePage/ServicesSection';
 import TestimonialsSection from '../HomePage/TestimonialSection';
+import InstagramSection from './Instagram';
 import WhyChooseUsSection from '../HomePage/WhyChooseUs';
 
 const Home = () => {
@@ -68,6 +69,7 @@ const Home = () => {
       <div className="relative z-10 flex flex-col">
         <HeroSection /> 
         <AboutSection />
+        <InstagramSection />
         <ProjectsSection />
         <ServicesSection />
         <WhyChooseUsSection />

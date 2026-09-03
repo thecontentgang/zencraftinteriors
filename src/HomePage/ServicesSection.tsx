@@ -1,192 +1,208 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useModal } from '../components/ModalContext'; 
+import { useGSAP } from '@gsap/react';
+import { useModal } from '../components/ModalContext'; // Adjust path if needed
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const services = [
   {
-    title: "Residential Design",
-    headline: "Crafting your personal sanctuary.",
-    desc: "We transform houses into deeply personal spaces. From spatial planning and custom millwork to selecting the perfect textiles, every detail is meticulously curated to reflect your lifestyle and bring quiet luxury into your daily routines.",
-    img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2070&auto=format&fit=crop"
+    id: '01',
+    title: 'Residential Sanctuaries',
+    description: 'End-to-end interior design for luxury villas and bespoke apartments. We create deeply personal spaces that balance elegant aesthetics with daily functionality.',
+    features: ['Space Planning', 'Custom Millwork', 'Material Selection', 'Turnkey Installation'],
+    image: '/residential-design.webp',
+    accentColor: 'from-orange-500/20' 
   },
   {
-    title: "Commercial Spaces",
-    headline: "Environments that inspire.",
-    desc: "Your workspace should leave a lasting impression. We design commercial environments—whether boutique retail, modern offices, or hospitality venues—that perfectly balance your brand's identity with ergonomic, seamless flow.",
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+    id: '02',
+    title: 'Commercial & Hospitality',
+    description: 'Elevating brand identities through immersive spatial design. From boutique hotels to high-end executive offices, we design spaces that captivate and convert.',
+    features: ['Brand Translation', 'Flow Optimization', 'Acoustic Design', 'Commercial Lighting'],
+    image: '/commercial-design.webp',
+    accentColor: 'from-blue-500/20' 
   },
   {
-    title: "Design Consultation",
-    headline: "Clarity for your vision.",
-    desc: "Not sure where to begin? We offer dedicated sessions to untangle your ideas. We’ll guide you through layout strategies, premium material selections, and color palettes, giving you a definitive roadmap for your space.",
-    img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"
+    id: '03',
+    title: 'Architectural Renovation',
+    description: 'Breathing new life into existing structures. We handle structural remodeling, layout reconfiguration, and complete exterior-to-interior modernization.',
+    features: ['Structural Drafting', 'Permit Management', 'Contractor Oversight', '3D Visualization'],
+    image: '/architecture-rennovation.webp',
+    accentColor: 'from-emerald-500/20' 
   },
   {
-    title: "Project Management",
-    headline: "Flawless, stress-free execution.",
-    desc: "We handle the complexities so you don't have to. From coordinating trusted contractors to overseeing the final installation, we ensure your project is executed to our exact standards, on schedule, and within your budget.",
-    img: "https://images.unsplash.com/photo-1504307651254-35680f356f27?q=80&w=2070&auto=format&fit=crop"
+    id: '04',
+    title: 'Bespoke Furniture & Styling',
+    description: 'The final layer of soul. We curate rare artifacts, source global art pieces, and design custom furniture tailored to the exact dimensions of your space.',
+    features: ['Art Curation', 'Textile Sourcing', 'Custom Upholstery', 'Final Decor Styling'],
+    image: '/furniture.webp',
+    accentColor: 'from-purple-500/20' 
   }
 ];
 
 const ServicesSection: React.FC = () => {
-  const { openModal } = useModal(); 
+  const { openModal } = useModal();
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const containerRef = useRef<HTMLElement>(null);
-  const introTextRef = useRef<HTMLDivElement>(null);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
-  const bgImagesRef = useRef<(HTMLImageElement | null)[]>([]);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  useGSAP(() => {
+    // 1. Header Reveal
+    gsap.fromTo('.section-header',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%'
+        }
+      }
+    );
 
-  useEffect(() => {
-    const mm = gsap.matchMedia();
+    // 2. Alternating Row Reveals
+    const rows = gsap.utils.toArray('.service-row') as HTMLElement[];
 
-    mm.add({
-      isDesktop: "(min-width: 768px)",
-      isMobile: "(max-width: 767px)"
-    }, (context) => {
-      const { isMobile } = context.conditions as { isMobile: boolean, isDesktop: boolean };
-
-      gsap.set(imageWrapperRef.current, {
-        xPercent: -50,
-        bottom: isMobile ? "24px" : "48px",
-        width: isMobile ? "92vw" : "60vw",
-        height: isMobile ? "30vh" : "40vh",
-        borderRadius: "24px"
-      });
-
-      bgImagesRef.current.forEach((img, i) => {
-        if (i !== 0) gsap.set(img, { opacity: 0 });
-      });
-
-      // FIX: Use autoAlpha instead of opacity so invisible cards don't block clicks!
-      cardsRef.current.forEach((card) => {
-        gsap.set(card, { autoAlpha: 0, y: 40 }); 
-      });
+    rows.forEach((row, i) => {
+      const isEven = i % 2 === 0;
+      const imgWrapper = row.querySelector('.img-wrapper');
+      const imgInner = row.querySelector('.img-inner');
+      const card = row.querySelector('.glass-card');
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=500%", 
-          pin: true,
-          scrub: 1, 
-          anticipatePin: 1,
+          trigger: row,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse'
         }
       });
 
-      tl.to(introTextRef.current, { opacity: 0, y: -50, duration: 1 }, 0);
-      
-      tl.to(imageWrapperRef.current, {
-        width: "100vw",
-        height: "100vh",
-        bottom: "0px",
-        borderRadius: "0px",
-        duration: 1.5,
-        ease: "power2.inOut"
-      }, 0);
+      // Image wrapper slides up slightly
+      tl.fromTo(imgWrapper,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
+      );
 
-      tl.to(overlayRef.current, { opacity: 0.75, duration: 1 }, 1);
-      
-      // FIX: autoAlpha used here
-      tl.to(cardsRef.current[0], { autoAlpha: 1, y: 0, duration: 1, ease: "power2.out" }, 1.2);
+      // Image inner parallax scale down (cinematic feel)
+      tl.fromTo(imgInner,
+        { scale: 1.15 },
+        { scale: 1, duration: 1.5, ease: 'power2.out' },
+        '<'
+      );
 
-      for (let i = 1; i < services.length; i++) {
-        const label = `slide${i}`;
-        
-        tl.to({}, { duration: 1.5 }); 
-        
-        // FIX: autoAlpha used here to hide the old card and remove it from mouse interactions
-        tl.to(cardsRef.current[i - 1], { autoAlpha: 0, y: -40, duration: 1 }, label);
-        
-        tl.to(bgImagesRef.current[i], { opacity: 1, duration: 1.2 }, label);
-        
-        // FIX: autoAlpha used here to show the new card
-        tl.to(cardsRef.current[i], { autoAlpha: 1, y: 0, duration: 1, ease: "power2.out" }, `${label}+=0.4`);
-      }
-
-      tl.to({}, { duration: 1.5 });
+      // Glass card floats in from the side based on alternating layout
+      tl.fromTo(card,
+        { opacity: 0, x: isEven ? 40 : -40, y: 20 },
+        { opacity: 1, x: 0, y: 0, duration: 1.2, ease: 'power3.out' },
+        '<0.2'
+      );
     });
 
-    return () => mm.revert();
-  }, []);
+  }, { scope: containerRef });
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative h-screen w-full bg-[var(--color-primary)] overflow-hidden"
-    >
-      
-      {/* --- INTRO HEADLINE --- */}
-      <div 
-        ref={introTextRef} 
-        className="absolute top-[15%] md:top-[20%] left-1/2 -translate-x-1/2 z-20 text-center w-full px-6"
-      >
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-secondary)] bg-white/5 border border-white/10 backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-secondary)] animate-pulse" />
-          Expertise
-        </span>
-        <h2 className="text-5xl md:text-7xl lg:text-8xl font-karlen tracking-tighter leading-tight text-white">
-          What We <span className='text-[var(--color-secondary)]'>Provide</span> 
-        </h2>
-      </div>
+    <div ref={containerRef} className="relative w-full bg-[#050505] py-20 md:py-32 font-body overflow-hidden selection:bg-sand selection:text-primary">
 
-      {/* --- EXPANDING IMAGE CONTAINER --- */}
-      <div
-        ref={imageWrapperRef}
-        className="absolute left-1/2 z-10 overflow-hidden"
-      >
-        {services.map((service, index) => (
-          <img
-            key={index}
-            ref={(el) => { bgImagesRef.current[index] = el; }}
-            src={service.img}
-            alt={service.title}
-            className="absolute inset-0 w-full h-full object-cover scale-[1.05]"
-          />
-        ))}
-        <div ref={overlayRef} className="absolute inset-0 bg-[#0a0a0a] opacity-0 z-10" />
-      </div>
+      {/* Background Ambient Glow */}
+      <div className="absolute top-0 right-0 w-full max-w-4xl h-96 bg-secondary/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-      {/* --- SERVICES CARDS --- */}
-      <div className="absolute inset-0 z-30 pointer-events-none flex items-center justify-center px-4 md:px-0">
-        {services.map((service, index) => (
-          <div
-            key={index}
-            ref={(el) => { cardsRef.current[index] = el; }}
-            className="absolute w-full max-w-xl md:max-w-2xl bg-black/40 border border-white/10 backdrop-blur-2xl p-8 md:p-14 rounded-3xl pointer-events-auto shadow-[0_30px_60px_rgba(0,0,0,0.5)] text-center flex flex-col items-center"
-          >
-            <span className="text-[var(--color-secondary)] text-sm md:text-base font-mono mb-4 block opacity-90 tracking-widest uppercase">
-              0{index + 1} // {service.title}
+      <div className="max-w-[85rem] mx-auto w-full px-4 sm:px-6 lg:px-12">
+
+        {/* --- HEADER --- */}
+        <div className="flex flex-col items-center text-center mb-16 md:mb-24 section-header">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="w-8 md:w-12 h-px bg-secondary" />
+            <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-secondary">
+              Our Expertise
             </span>
-            
-            <h3 className="text-3xl md:text-5xl font-karlen tracking-tight text-white mb-6 leading-tight">
-              {service.headline}
-            </h3>
-            
-            <p className="text-base md:text-lg text-white/80 font-sans leading-relaxed mb-10 mx-auto max-w-lg">
-              {service.desc}
-            </p>
-            
-            <button 
-              type="button"
-              onClick={openModal}
-              className="group relative inline-flex items-center gap-3 bg-[var(--color-secondary)] hover:bg-[#d4af37] text-[var(--color-primary)] font-medium px-8 md:px-10 py-4 rounded-full text-sm md:text-base tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden shadow-[0_10px_30px_rgba(212,175,55,0.2)]"
-            >
-              <span>Book a Consultation</span>
-              <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </button>
+            <span className="w-8 md:w-12 h-px bg-secondary" />
           </div>
-        ))}
-      </div>
 
-    </section>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-white leading-[1.05] tracking-tight max-w-4xl">
+            Signature <span className="text-sand italic font-light">Services</span>
+          </h2>
+        </div>
+
+        {/* --- ALTERNATING CARDS LAYOUT --- 
+            Adjusted Gaps: gap-20 (mobile), gap-28 (tablet), gap-32 (desktop)
+        */}
+        <div className="flex flex-col gap-20 md:gap-28 lg:gap-32">
+          {services.map((service, index) => {
+            const isEven = index % 2 === 0;
+
+            return (
+              <div
+                key={service.id}
+                className={`service-row relative w-full flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center group`}
+              >
+
+                {/* --- 1. CINEMATIC IMAGE HALF --- 
+                    Adjusted Heights: 320px (mobile), 400px (tablet), 500px (desktop)
+                    Adjusted Widths: 60% on desktop (was 65%) to balance the shorter height
+                */}
+                <div className="img-wrapper relative w-full lg:w-[60%] h-[320px] sm:h-[400px] lg:h-[500px] rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden shadow-2xl z-10 shrink-0">
+                  <img
+                    src={service.image} // FIXED: was service.img
+                    alt={service.title}
+                    className="img-inner w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 transition-[filter] duration-1000"
+                  />
+                  <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-1000 pointer-events-none" />
+                </div>
+
+                {/* --- 2. FLOATING GLASS CARD HALF --- 
+                    Adjusted Widths: 90% (mobile), 80% (tablet), 45% (desktop)
+                    Adjusted Overlap: -mt-12 (mobile), lg:-ml-24 / lg:-mr-24 (desktop)
+                */}
+                <div className={`
+                  glass-card relative z-20 w-[90%] sm:w-[80%] lg:w-[45%] -mt-12 sm:-mt-16 lg:mt-0
+                  ${isEven ? 'lg:-ml-24' : 'lg:-mr-24'}
+                `}>
+
+                  <div className="relative bg-[#050505]/70 backdrop-blur-2xl border border-white/10 rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-700 hover:bg-[#050505]/90 hover:border-white/20">
+
+                    {/* FIXED: was service.accent, also removed "to-transparent" from data object and placed it here for cleaner Tailwind compiling */}
+                    <div className={`absolute top-0 right-0 w-full h-full bg-gradient-to-bl ${service.accentColor} to-transparent opacity-30 pointer-events-none -z-10`} />
+
+                    <div className="flex items-center gap-4 mb-6 md:mb-8">
+                      <span className="text-3xl md:text-4xl font-karlen font-bold text-white/20 group-hover:text-[#D4AF37] transition-colors duration-700">
+                        {service.id}
+                      </span>
+                      <div className="h-px flex-grow bg-white/10" />
+                    </div>
+
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-karlen text-white mb-4 sm:mb-6 group-hover:text-[#D4AF37] transition-colors duration-700">
+                      {service.title}
+                    </h3>
+
+                    <p className="text-sm md:text-base text-white/70 font-light leading-relaxed mb-8 md:mb-10">
+                      {service.description} {/* FIXED: was service.desc */}
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={openModal}
+                      className="inline-flex items-center gap-4 group/btn"
+                    >
+                      <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover/btn:border-[#D4AF37] group-hover/btn:text-[#050505] group-hover/btn:bg-[#D4AF37] transition-all duration-500">
+                        {/* FIXED: Standardized Arrow Right SVG */}
+                        <svg className="w-4 h-4 transform group-hover/btn:rotate-45 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16M13 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                      <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-white group-hover/btn:text-[#D4AF37] transition-colors duration-500">
+                        Book a Consultation
+                      </span>
+                    </button>
+
+                  </div>
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+    </div>
   );
 };
 

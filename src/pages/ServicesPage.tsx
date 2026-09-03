@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 
 const ServicesPage: React.FC = () => {
   const services = [
@@ -9,7 +10,7 @@ const ServicesPage: React.FC = () => {
       title: 'Residential Sanctuaries',
       description: 'End-to-end interior design for luxury villas and bespoke apartments. We create deeply personal spaces that balance elegant aesthetics with daily functionality.',
       features: ['Space Planning', 'Custom Millwork', 'Material Selection', 'Turnkey Installation'],
-      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1600&auto=format&fit=crop',
+      image: '/residential-design.webp',
       accentColor: 'from-orange-500/20 to-transparent' 
     },
     {
@@ -17,7 +18,7 @@ const ServicesPage: React.FC = () => {
       title: 'Commercial & Hospitality',
       description: 'Elevating brand identities through immersive spatial design. From boutique hotels to high-end executive offices, we design spaces that captivate and convert.',
       features: ['Brand Translation', 'Flow Optimization', 'Acoustic Design', 'Commercial Lighting'],
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop',
+      image: '/commercial-design.webp',
       accentColor: 'from-blue-500/20 to-transparent' 
     },
     {
@@ -25,7 +26,7 @@ const ServicesPage: React.FC = () => {
       title: 'Architectural Renovation',
       description: 'Breathing new life into existing structures. We handle structural remodeling, layout reconfiguration, and complete exterior-to-interior modernization.',
       features: ['Structural Drafting', 'Permit Management', 'Contractor Oversight', '3D Visualization'],
-      image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1600&auto=format&fit=crop',
+      image: '/architecture-rennovation.webp',
       accentColor: 'from-emerald-500/20 to-transparent' 
     },
     {
@@ -33,7 +34,7 @@ const ServicesPage: React.FC = () => {
       title: 'Bespoke Furniture & Styling',
       description: 'The final layer of soul. We curate rare artifacts, source global art pieces, and design custom furniture tailored to the exact dimensions of your space.',
       features: ['Art Curation', 'Textile Sourcing', 'Custom Upholstery', 'Final Decor Styling'],
-      image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1600&auto=format&fit=crop',
+      image: '/furniture.webp',
       accentColor: 'from-purple-500/20 to-transparent' 
     }
   ];
@@ -238,9 +239,12 @@ const ServicesPage: React.FC = () => {
                       ))}
                     </div>
 
-                    {/* Interactive Button */}
+                    {/* Interactive Button changed to <Link> */}
                     <div className="slide-up-fade" style={{ transitionDelay: isEven ? '0.6s' : '0.4s' }}>
-                      <a href={`/services/${service.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="inline-flex items-center gap-4 group/btn">
+                      <Link 
+                        to={`/services/${service.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} 
+                        className="inline-flex items-center gap-4 group/btn"
+                      >
                         <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover/btn:border-secondary group-hover/btn:text-primary group-hover/btn:bg-secondary transition-all duration-500 ease-buttery">
                           <svg className="w-4 h-4 transform group-hover/btn:rotate-45 transition-transform duration-500 ease-buttery" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7-7m7-7H3" />
@@ -249,7 +253,7 @@ const ServicesPage: React.FC = () => {
                         <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-white group-hover/btn:text-secondary transition-colors duration-500 ease-buttery">
                           Explore Service
                         </span>
-                      </a>
+                      </Link>
                     </div>
 
                   </div>
@@ -275,10 +279,11 @@ const ServicesPage: React.FC = () => {
             </p>
           </div>
 
+          {/* Changed to <Link> */}
           <div className="slide-up-fade" style={{ transitionDelay: '0.2s' }}>
-            <a href="/contact" className="px-10 py-4 bg-secondary text-primary text-[10px] md:text-xs font-bold tracking-widest uppercase rounded-full hover:bg-white transition-all duration-300 shadow-[0_10px_30px_rgba(212,175,55,0.2)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.3)] active:scale-95">
+            <Link to="/contact" className="px-10 py-4 bg-secondary text-primary text-[10px] md:text-xs font-bold tracking-widest uppercase rounded-full hover:bg-white transition-all duration-300 shadow-[0_10px_30px_rgba(212,175,55,0.2)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.3)] active:scale-95">
               Start a Consultation
-            </a>
+            </Link>
           </div>
 
         </div>
