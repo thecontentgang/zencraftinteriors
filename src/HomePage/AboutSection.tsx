@@ -106,7 +106,7 @@ const AboutSection: React.FC = () => {
           {/* FIX: Added md:col-span-2 and a min-height for tablet so the image doesn't collapse. Fixed row spanning to only happen on desktop (lg:row-span-2). */}
           <div className="bento-box md:col-span-2 lg:col-span-2 lg:row-span-2 min-h-[350px] md:min-h-[450px] lg:min-h-0 bg-[#0D0D0E] border border-white/10 rounded-[2rem] overflow-hidden relative group shadow-xl">
             <img 
-              src="src/assets/praveen-VRE/praveen-img-9.webp" 
+              src="/praveen-VRE/praveen-img-9.webp" 
               alt="Interior Design Detail" 
               className="bento-img absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-[filter] duration-700"
             />

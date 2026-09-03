@@ -28,8 +28,8 @@ const projects: Project[] = [
     num: '01',
     name: 'Sumith',
     location: 'Hyderabad',
-    leftImage: '/src/assets/sumith-AZ/sumith-img-2.webp',
-    rightImage: '/src/assets/sumith-AZ/sumith-img-1.webp',
+    leftImage: '/sumith-AZ/sumith-img-2.webp',
+    rightImage: '/sumith-AZ/sumith-img-1.webp',
     leftCaption: 'The Gathering Space — Sandblasted limestone meets century-old reclaimed teak.',
     rightCaption: 'The Master Suite — Crafted for light, shadow, and quiet afternoons.'
   },
@@ -38,8 +38,8 @@ const projects: Project[] = [
     num: '03',
     name: 'Prudhvi - Bollineni Bion',
     location: 'Hyderabad',
-    leftImage: '/src/assets/prudhvi-bion/prudhvi-img-2.webp',
-    rightImage: '/src/assets/prudhvi-bion/prudhvi-img-1.webp',
+    leftImage: '/prudhvi-bion/prudhvi-img-2.webp',
+    rightImage: '/prudhvi-bion/prudhvi-img-1.webp',
     leftCaption: 'The Grand Lounge — Floating silk screens balancing monolithic travertine walls.',
     rightCaption: 'The Sanctuary — Plaster ceilings, wool textiles, and a gentle ambient glow.'
   },
@@ -48,8 +48,8 @@ const projects: Project[] = [
     num: '04',
     name: 'Praveen',
     location: 'Hyderabad',
-    leftImage: '/src/assets/praveen-VRE/praveen-img-2.webp',
-    rightImage: '/src/assets/praveen-VRE/praveen-img-1.webp',
+    leftImage: '/praveen-VRE/praveen-img-2.webp',
+    rightImage: '/praveen-VRE/praveen-img-1.webp',
     leftCaption: 'The Minimalist Foyer — A study in geometry, framing the entrance with quiet luxury.',
     rightCaption: 'The Private Terrace — Seamlessly blending indoor living with outdoor serenity.'
   },
@@ -58,8 +58,8 @@ const projects: Project[] = [
     num: '05',
     name: 'Dharmateja',
     location: 'Hyderabad',
-    leftImage: '/src/assets/dharmateja/dharmateja-img-2.webp',
-    rightImage: '/src/assets/dharmateja/dharmateja-img-1.webp',
+    leftImage: '/dharmateja/dharmateja-img-2.webp',
+    rightImage: '/dharmateja/dharmateja-img-1.webp',
     leftCaption: 'The Ambient Living Area — Warm textures layered over precise architectural lines.',
     rightCaption: 'The Bespoke Dining — Custom millwork tailored for intimate evening gatherings.'
   },
@@ -68,8 +68,8 @@ const projects: Project[] = [
     num: '06',
     name: 'Bharani',
     location: 'Hyderabad',
-    leftImage: '/src/assets/bharani/bharani-img-2.webp',
-    rightImage: '/src/assets/bharani/bharani-img-1.webp',
+    leftImage: '/bharani/bharani-img-2.webp',
+    rightImage: '/bharani/bharani-img-1.webp',
     leftCaption: 'The Tactile Bedroom — Woven fabrics and fluted glass providing layered depth.',
     rightCaption: 'The Floating Staircase — An engineering marvel serving as a central sculpture.'
   },
@@ -78,8 +78,8 @@ const projects: Project[] = [
     num: '07',
     name: 'Ramakrishna',
     location: 'Hyderabad',
-    leftImage: '/src/assets/ramakrishna/ramakrishna-img-2.webp',
-    rightImage: '/src/assets/ramakrishna/ramakrishna-img-1.webp',
+    leftImage: '/ramakrishna/ramakrishna-img-2.webp',
+    rightImage: '/ramakrishna/ramakrishna-img-1.webp',
     leftCaption: 'The Monolithic Bath — Carved stone elements elevating daily rituals.',
     rightCaption: 'The Sunlit Corridor — Guiding the eye through meticulously proportioned spaces.'
   }

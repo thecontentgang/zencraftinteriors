@@ -195,7 +195,7 @@ const ContactPage: React.FC = () => {
               style={{ transitionDelay: '0.3s' }}
             >
               <img 
-                src="/src/assets/ramakrishna/ramakrishna-img-10.webp" 
+                src="/ramakrishna/ramakrishna-img-10.webp" 
                 alt="Zencraft Studio" 
                 className="image-inner w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-[transform,filter] duration-700"
               />
