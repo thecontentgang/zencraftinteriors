@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import AboutHero from './AboutHero';
 import AboutPhilosophy from './AboutPhilosophy';
 import AboutProcess from './AboutProcess';
