@@ -7,38 +7,38 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+// Removed the static 'poster' images from the data array
 const testimonials = [
   {
     id: 1,
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&h=1066&auto=format&fit=crop",
-    quote: "They didn't just redesign our home; they completely re-engineered how we live in it. The spatial flow and custom millwork are flawless.",
-    name: "Vikram Reddy",
-    role: "Homeowner, Jubilee Hills"
+    videoSrc: "/testimonials/testimonial-1.mp4", 
+    name: "Raghu",
+    role: "Homeowner"
   },
   {
     id: 2,
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
-    poster: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&h=1066&auto=format&fit=crop",
-    quote: "Our corporate headquarters required a balance of aggressive modernism and calm focus. The execution was handled with absolute precision.",
-    name: "Priya Sharma",
-    role: "CEO, TechFlow Solutions"
+    videoSrc: "/testimonials/testimonial-2.mp4",
+    name: "Surya Kumar",
+    role: "Retired Accountant"
   },
   {
     id: 3,
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
-    poster: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=600&h=1066&auto=format&fit=crop",
-    quote: "Finding designers who truly understand 'quiet luxury' is rare. The way they manipulate natural light and raw textures is nothing short of mastery.",
-    name: "Ananya Desai",
-    role: "Creative Director, Studio Aura"
+    videoSrc: "/testimonials/testimonial-3.mp4",
+    name: "Vamsi",
+    role: "House Owner"
   },
   {
     id: 4,
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
-    poster: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&h=1066&auto=format&fit=crop",
+    videoSrc: "/testimonials/testimonial-4.mp4",
     quote: "No hidden costs, no missed deadlines. The sanctuary they crafted for us is deeply personal and perfectly balanced for our family.",
-    name: "Arjun Rao",
-    role: "Homeowner, Banjara Hills"
+    name: "Srinivasa Rao",
+    role: "Homeowner, Secunderabad"
+  },
+  {
+    id: 5,
+    videoSrc: "/testimonials/testimonial-5.mp4",
+    name: "Rohit, Sindhuja",
+    role: "3 BHK House Owner"
   }
 ];
 
@@ -50,7 +50,7 @@ const HorizontalVideoTestimonials: React.FC = () => {
   const [playingId, setPlayingId] = useState<number | null>(null);
   const [isMuted, setIsMuted] = useState(false);
 
-  // --- DRAG TO SCROLL LOGIC ---
+  // --- DRAG TO SCROLL LOGIC (Desktop Only) ---
   const [isDragging, setIsDragging] = useState(false);
   const dragData = useRef({ isDown: false, startX: 0, scrollLeft: 0, dragged: false });
 
@@ -76,11 +76,10 @@ const HorizontalVideoTestimonials: React.FC = () => {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!dragData.current.isDown || !scrollContainerRef.current) return;
-    e.preventDefault(); // Prevents text selection while dragging
+    
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
     const walk = (x - dragData.current.startX) * 1.5; // Scroll speed multiplier
     
-    // If moved more than 5px, consider it a drag (not a click)
     if (Math.abs(walk) > 5) {
       dragData.current.dragged = true;
     }
@@ -110,7 +109,6 @@ const HorizontalVideoTestimonials: React.FC = () => {
   }, { scope: sectionRef });
 
   const handleCardClick = (index: number, e: React.MouseEvent) => {
-    // If the user was dragging the carousel, don't trigger play/pause
     if (dragData.current.dragged) {
       e.preventDefault();
       e.stopPropagation();
@@ -190,15 +188,15 @@ const HorizontalVideoTestimonials: React.FC = () => {
           </div>
         </div>
 
-        {/* --- INSTAGRAM REELS STYLE CAROUSEL (DRAGGABLE) --- */}
+        {/* --- INSTAGRAM REELS STYLE CAROUSEL --- */}
         <div 
           ref={scrollContainerRef}
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
-          // Dynamic classes: Swap snapping for fluid movement when dragging
-          className={`flex gap-4 md:gap-6 overflow-x-auto pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] touch-pan-x select-none ${isDragging ? 'cursor-grabbing snap-none' : 'cursor-grab snap-x snap-mandatory scroll-smooth'}`}
+          // Added md:select-none to allow normal touch behavior on mobile while enabling drag on desktop
+          className={`flex gap-4 md:gap-6 overflow-x-auto pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] md:select-none touch-auto ${isDragging ? 'cursor-grabbing snap-none' : 'cursor-grab snap-x snap-mandatory scroll-smooth'}`}
         >
           {testimonials.map((t, index) => {
             const isPlaying = playingId === index;
@@ -206,16 +204,15 @@ const HorizontalVideoTestimonials: React.FC = () => {
             return (
               <div 
                 key={t.id} 
-                // Reduced sizes: 65vw mobile, 260px tablet, 280px desktop. Maintains 9:16 aspect ratio.
                 className="testi-card relative w-[65vw] sm:w-[260px] md:w-[280px] aspect-[9/16] shrink-0 snap-center md:snap-start bg-[#39342D] border border-[#B58A3A]/20 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group shadow-[0_15px_40px_rgba(57,52,45,0.1)] hover:border-[#B58A3A]/50 transition-all duration-500"
                 onClick={(e) => handleCardClick(index, e)}
               >
                 
-                {/* 1. Video Player */}
+                {/* 1. Video Player (No poster, using #t=0.001 to force first frame) */}
                 <video
                   ref={(el) => { videoRefs.current[index] = el; }}
-                  src={t.videoSrc}
-                  poster={t.poster}
+                  src={`${t.videoSrc}#t=0.001`}
+                  preload="metadata"
                   playsInline
                   loop
                   className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 pointer-events-none ${!isPlaying && 'group-hover:scale-105'}`}

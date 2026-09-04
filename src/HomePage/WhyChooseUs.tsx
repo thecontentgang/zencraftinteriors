@@ -132,10 +132,7 @@ const WhyChooseUsTimeline: React.FC = () => {
         
         {/* --- HEADER --- */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-32 flex flex-col items-center">
-          <span className="why-header-el inline-flex items-center gap-2 px-3.5 py-1 mb-6 rounded-full text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase text-[#B58A3A] bg-[#B58A3A]/10 border border-[#B58A3A]/20 backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#B58A3A] animate-pulse shadow-[0_0_8px_#B58A3A]" />
-            The Zencraft Standard
-          </span>
+          
           <h2 className="why-header-el text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] text-[#39342D] mb-4 md:mb-6">
             Our Proven <br className="hidden md:block" />
             <span className="text-[#B58A3A] italic font-light">Journey.</span>

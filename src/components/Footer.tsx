@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
             {/* Left: CTA */}
             <div className="flex flex-col max-w-md justify-center">
               <h3 className="footer-top-el text-4xl md:text-5xl font-karlen tracking-tighter leading-[1.05] mb-6">
-                <span className="text-[#39342D]/50">Imagine It.</span> <br />
+                <span className="text-[#B58A3A] pb-2">Imagine It.</span> <br />
                 We’ll Build It.
               </h3>
               
@@ -209,18 +209,18 @@ const Footer: React.FC = () => {
 
             {/* MASSIVE BRAND TEXT - Added pt-4 and leading-none to prevent top cut-off */}
             <div 
-              ref={textRef} 
-              className="w-full flex justify-between overflow-hidden leading-none pt-4 pb-2 mb-12 sm:mb-20 pointer-events-none select-none"
-            >
-              {massiveWord.split('').map((char, index) => (
-                <span 
-                  key={index} 
-                  className="char text-[15vw] md:text-[16.5vw] font-black font-karlen tracking-tighter text-[#F8F5EE]"
-                >
-                  {char}
-                </span>
-              ))}
-            </div>
+  ref={textRef} 
+  className="w-full flex justify-between overflow-hidden leading-none pt-4 pb-2 mb-12 sm:mb-20 px-2 md:px-4 pointer-events-none select-none"
+>
+  {massiveWord.split('').map((char, index) => (
+    <span 
+      key={index} 
+      className="char text-[15vw] md:text-[13.5vw] lg:text-[14vw] font-black font-velick tracking-tighter text-[#F8F5EE]"
+    >
+      {char}
+    </span>
+  ))}
+</div>
 
             {/* Bottom Legal Row */}
             <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[#E9DFCE]/60 pt-8 border-t border-[#F8F5EE]/10">

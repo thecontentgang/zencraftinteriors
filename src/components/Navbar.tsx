@@ -110,16 +110,17 @@ export default function PremiumNavbar() {
 
         {/* CENTER: LOGO */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/3 flex justify-center items-center pointer-events-auto z-50">
-          <a href="/" onClick={() => setIsOpen(false)} className="block py-1">
-            <img
-              src="/logo.png"
-              alt="Zencraft Logo"
-              // Increased the logo sizes significantly for both initial state and scrolled state
-              className={`w-auto object-contain transition-all duration-500 ease-out hover:scale-105 active:scale-95 ${
-                isScrolledPastHero && !isOpen ? 'h-16 sm:h-20 md:h-24' : 'h-24 sm:h-32 md:h-40'
-              }`}
-            />
-          </a>
+          <div className={`transition-transform duration-500 ease-in-out ${isScrollingDown && !isOpen ? '-translate-y-24' : 'translate-y-0'}`}>
+            <a href="/" onClick={() => setIsOpen(false)} className="block py-1">
+              <img
+                src="/logo.png"
+                alt="Zencraft Logo"
+                className={`w-auto object-contain transition-all duration-500 ease-out hover:scale-105 active:scale-95 ${
+                  isScrolledPastHero && !isOpen ? 'h-22 sm:h-20 md:h-24' : 'h-24 sm:h-32 md:h-40'
+                }`}
+              />
+            </a>
+          </div>
         </div>
 
         {/* RIGHT: CONSULTATION BUTTON */}

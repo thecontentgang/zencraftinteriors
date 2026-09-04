@@ -27,49 +27,28 @@ const InstagramIcon = ({ size = 24, strokeWidth = 2, className = "" }) => (
   </svg>
 );
 
+// Removed static poster images
 const igPosts = [
   { 
     id: 1, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&h=750&auto=format&fit=crop", 
+    videoSrc: "/testimonials/insta-1.mp4", 
     title: "Project: Jubilee Hills" 
   },
   { 
     id: 2, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=600&h=750&auto=format&fit=crop", 
+    videoSrc: "/testimonials/insta-2.mp4", 
     title: "Detail: Custom Millwork" 
   },
   { 
     id: 3, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&h=750&auto=format&fit=crop", 
+    videoSrc: "/testimonials/insta-3.mp4", 
     title: "Process: Lighting Design" 
   },
   { 
     id: 4, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&h=750&auto=format&fit=crop", 
+    videoSrc: "/testimonials/insta-4.mp4", 
     title: "Feature: Raw Textures" 
   },
-  { 
-    id: 5, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=600&h=750&auto=format&fit=crop", 
-    title: "Concept: Open Living" 
-  },
-  { 
-    id: 6, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&h=750&auto=format&fit=crop", 
-    title: "Detail: Minimalist Kitchen" 
-  },
-  { 
-    id: 7, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    poster: "https://images.unsplash.com/photo-1600566753086-00f18efc2291?q=80&w=600&h=750&auto=format&fit=crop", 
-    title: "Project: Banjara Hills" 
-  }
 ];
 
 export default function SocialJournalSection() {
@@ -181,9 +160,10 @@ export default function SocialJournalSection() {
               onClick={() => setActiveIndex(index)}
               className={`absolute w-[240px] sm:w-[320px] md:w-[400px] h-[320px] sm:h-[420px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${getCardStyle(index)} bg-[#39342D] border border-[#B58A3A]/20`}
             >
+              {/* VIDEO ELEMENT: No poster, using #t=0.001 to force first frame */}
               <video 
-                src={post.videoSrc} 
-                poster={post.poster}
+                src={`${post.videoSrc}#t=0.001`}
+                preload="metadata"
                 autoPlay
                 muted
                 loop
@@ -191,21 +171,7 @@ export default function SocialJournalSection() {
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
 
-              {/* Gradient Overlay & Text */}
-              <div className={`absolute inset-0 bg-gradient-to-t from-[#39342D]/95 via-[#39342D]/30 to-transparent flex flex-col justify-end p-5 md:p-8 transition-opacity duration-500 pointer-events-none ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}>
-                <p className="text-[#F8F5EE] font-karlen text-lg md:text-xl">
-                  {post.title}
-                </p>
-                <a 
-                  href="https://www.instagram.com/thezencraftinteriors/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pointer-events-auto flex items-center gap-2 text-[#B58A3A] mt-2 text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#F8F5EE] transition-colors w-fit"
-                >
-                  <span>View Post</span>
-                  <ArrowUpRight size={14} />
-                </a>
-              </div>
+              
             </div>
           ))}
 

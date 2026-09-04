@@ -26,7 +26,7 @@ const ServicesPage: React.FC = () => {
       title: 'Architectural Renovation',
       description: 'Breathing new life into existing structures. We handle structural remodeling, layout reconfiguration, and complete exterior-to-interior modernization.',
       features: ['Structural Drafting', 'Permit Management', 'Contractor Oversight', '3D Visualization'],
-      image: '/architecture-rennovation.webp',
+      image: '/architecture-rennovation.jpg',
       accentColor: 'from-emerald-500/20 to-transparent' 
     },
     {
