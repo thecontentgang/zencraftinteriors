@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const testimonials = [
   {
     id: 1,
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", // Replace with 9:16 vertical videos
+    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
     poster: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&h=1066&auto=format&fit=crop",
     quote: "They didn't just redesign our home; they completely re-engineered how we live in it. The spatial flow and custom millwork are flawless.",
     name: "Vikram Reddy",
@@ -47,34 +47,76 @@ const HorizontalVideoTestimonials: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   
-  // Track which video is currently playing to ensure only one plays at a time
   const [playingId, setPlayingId] = useState<number | null>(null);
   const [isMuted, setIsMuted] = useState(false);
+
+  // --- DRAG TO SCROLL LOGIC ---
+  const [isDragging, setIsDragging] = useState(false);
+  const dragData = useRef({ isDown: false, startX: 0, scrollLeft: 0, dragged: false });
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    dragData.current.isDown = true;
+    dragData.current.dragged = false;
+    setIsDragging(true);
+    if (scrollContainerRef.current) {
+      dragData.current.startX = e.pageX - scrollContainerRef.current.offsetLeft;
+      dragData.current.scrollLeft = scrollContainerRef.current.scrollLeft;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    dragData.current.isDown = false;
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    dragData.current.isDown = false;
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragData.current.isDown || !scrollContainerRef.current) return;
+    e.preventDefault(); // Prevents text selection while dragging
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - dragData.current.startX) * 1.5; // Scroll speed multiplier
+    
+    // If moved more than 5px, consider it a drag (not a click)
+    if (Math.abs(walk) > 5) {
+      dragData.current.dragged = true;
+    }
+    
+    scrollContainerRef.current.scrollLeft = dragData.current.scrollLeft - walk;
+  };
+  // -----------------------------
 
   useGSAP(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 75%",
+        start: "top 90%",
       }
     });
 
-    // Animate Header
     tl.fromTo(".testi-header-el", 
       { opacity: 0, y: 20 }, 
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }
     );
 
-    // Animate Cards Sliding In
     tl.fromTo(".testi-card", 
-      { opacity: 0, x: 50 }, 
-      { opacity: 1, x: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" },
-      "-=0.4"
+      { opacity: 0, x: 40 }, 
+      { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" },
+      "-=0.3"
     );
   }, { scope: sectionRef });
 
-  // Handle Video Playback Logic
-  const togglePlay = (index: number) => {
+  const handleCardClick = (index: number, e: React.MouseEvent) => {
+    // If the user was dragging the carousel, don't trigger play/pause
+    if (dragData.current.dragged) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
     const video = videoRefs.current[index];
     if (!video) return;
 
@@ -90,43 +132,41 @@ const HorizontalVideoTestimonials: React.FC = () => {
     }
   };
 
-  // Sync mute state across all videos
   useEffect(() => {
     videoRefs.current.forEach(video => {
       if (video) video.muted = isMuted;
     });
   }, [isMuted]);
 
-  // Carousel Scroll Controls
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     }
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#050505] text-white py-24 md:py-32 overflow-hidden font-sans">
+    <section ref={sectionRef} className="relative w-full bg-[#F8F5EE] text-[#39342D] py-20 md:py-32 overflow-hidden font-sans border-t border-[#B58A3A]/10">
       
-      {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
+      {/* Soft Gold Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(181,138,58,0.08)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
 
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* --- HEADER --- */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div className="max-w-2xl">
-            <span className="testi-header-el inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full text-[10px] md:text-xs font-mono tracking-widest uppercase text-white/70 bg-white/5 border border-white/10 backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-secondary,white)] animate-pulse" />
+            <span className="testi-header-el inline-flex items-center gap-2 px-3.5 py-1 mb-6 rounded-full text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase text-[#B58A3A] bg-[#B58A3A]/10 border border-[#B58A3A]/20 backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B58A3A] animate-pulse" />
               Client Perspectives
             </span>
-            <h2 className="testi-header-el text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] text-white/95">
-              The living <span className="text-[var(--color-secondary,#D4AF37)] italic font-light">proof.</span>
+            <h2 className="testi-header-el text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] text-[#39342D]">
+              The living <span className="text-[#B58A3A] italic font-light">proof.</span>
             </h2>
           </div>
           
@@ -134,26 +174,31 @@ const HorizontalVideoTestimonials: React.FC = () => {
           <div className="testi-header-el flex items-center gap-4">
             <button 
               onClick={() => setIsMuted(!isMuted)}
-              className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/50 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-[#8A8175] hover:text-[#39342D] transition-colors"
             >
               {isMuted ? 'Unmute Videos' : 'Mute Videos'}
             </button>
-            <div className="h-6 w-px bg-white/20 mx-2 hidden md:block" />
+            <div className="h-6 w-px bg-[#B58A3A]/30 mx-2 hidden md:block" />
             <div className="flex gap-2">
-              <button onClick={scrollLeft} className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
+              <button onClick={scrollLeft} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#B58A3A]/30 flex items-center justify-center text-[#39342D] hover:bg-[#B58A3A] hover:text-white hover:border-[#B58A3A] transition-colors shadow-sm">
+                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
               </button>
-              <button onClick={scrollRight} className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
+              <button onClick={scrollRight} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#B58A3A]/30 flex items-center justify-center text-[#39342D] hover:bg-[#B58A3A] hover:text-white hover:border-[#B58A3A] transition-colors shadow-sm">
+                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>
           </div>
         </div>
 
-        {/* --- INSTAGRAM REELS STYLE CAROUSEL --- */}
+        {/* --- INSTAGRAM REELS STYLE CAROUSEL (DRAGGABLE) --- */}
         <div 
           ref={scrollContainerRef}
-          className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          // Dynamic classes: Swap snapping for fluid movement when dragging
+          className={`flex gap-4 md:gap-6 overflow-x-auto pb-12 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] touch-pan-x select-none ${isDragging ? 'cursor-grabbing snap-none' : 'cursor-grab snap-x snap-mandatory scroll-smooth'}`}
         >
           {testimonials.map((t, index) => {
             const isPlaying = playingId === index;
@@ -161,9 +206,9 @@ const HorizontalVideoTestimonials: React.FC = () => {
             return (
               <div 
                 key={t.id} 
-                // Instagram-style 9:16 vertical aspect ratio card
-                className="testi-card relative w-[80vw] sm:w-[320px] md:w-[340px] aspect-[9/16] shrink-0 snap-center md:snap-start bg-[#0D0D0E] border border-white/10 rounded-[2rem] overflow-hidden group shadow-xl hover:border-white/20 transition-all duration-500 cursor-pointer"
-                onClick={() => togglePlay(index)}
+                // Reduced sizes: 65vw mobile, 260px tablet, 280px desktop. Maintains 9:16 aspect ratio.
+                className="testi-card relative w-[65vw] sm:w-[260px] md:w-[280px] aspect-[9/16] shrink-0 snap-center md:snap-start bg-[#39342D] border border-[#B58A3A]/20 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group shadow-[0_15px_40px_rgba(57,52,45,0.1)] hover:border-[#B58A3A]/50 transition-all duration-500"
+                onClick={(e) => handleCardClick(index, e)}
               >
                 
                 {/* 1. Video Player */}
@@ -173,54 +218,50 @@ const HorizontalVideoTestimonials: React.FC = () => {
                   poster={t.poster}
                   playsInline
                   loop
-                  className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ${!isPlaying && 'group-hover:scale-105'}`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 pointer-events-none ${!isPlaying && 'group-hover:scale-105'}`}
                 />
                   
                 {/* 2. Instagram-Style Gradient Overlays */}
-                {/* Top gradient for pause/play UI contrast */}
-                <div className={`absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-black/60 to-transparent transition-opacity duration-300 pointer-events-none ${isPlaying ? 'opacity-0' : 'opacity-100'}`} />
-                
-                {/* Bottom gradient for text readability (always visible like IG Reels) */}
-                <div className="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+                <div className={`absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#39342D]/60 to-transparent transition-opacity duration-300 pointer-events-none ${isPlaying ? 'opacity-0' : 'opacity-100'}`} />
+                <div className="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-[#39342D]/95 via-[#39342D]/40 to-transparent pointer-events-none" />
 
                 {/* Play/Pause UI Button (Centered) */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 ${isPlaying ? 'bg-black/50 opacity-0 scale-90' : 'bg-white/20 border border-white/30 group-hover:bg-[var(--color-secondary,#D4AF37)] group-hover:border-transparent group-hover:text-black opacity-100 scale-100'}`}>
-                    <svg className="w-6 h-6 ml-1 text-white group-hover:text-black transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 ${isPlaying ? 'bg-black/40 opacity-0 scale-90' : 'bg-white/90 shadow-lg group-hover:bg-[#B58A3A] group-hover:text-white opacity-100 scale-100 text-[#39342D]'}`}>
+                    <svg className="w-5 h-5 ml-1 transition-colors" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </div>
                 </div>
 
-                {/* Playing Indicator (Top Right) */}
+                {/* Playing Indicator */}
                 {isPlaying && (
-                  <div className="absolute top-6 right-6 flex gap-1 items-end h-4">
-                    <span className="w-1 h-2 bg-white animate-[bounce_1s_infinite]" />
-                    <span className="w-1 h-3 bg-white animate-[bounce_1.2s_infinite]" />
-                    <span className="w-1 h-4 bg-white animate-[bounce_0.8s_infinite]" />
+                  <div className="absolute top-5 right-5 flex gap-1 items-end h-3">
+                    <span className="w-1 h-1.5 bg-[#B58A3A] animate-[bounce_1s_infinite]" />
+                    <span className="w-1 h-2.5 bg-[#B58A3A] animate-[bounce_1.2s_infinite]" />
+                    <span className="w-1 h-3.5 bg-[#B58A3A] animate-[bounce_0.8s_infinite]" />
                   </div>
                 )}
 
-                {/* 3. Text Content (Floating at bottom like IG Reels) */}
-                <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 flex flex-col justify-end pointer-events-none">
-                  <svg className="w-5 h-5 text-[var(--color-secondary,#D4AF37)] opacity-70 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                {/* 3. Text Content */}
+                <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 flex flex-col justify-end pointer-events-none">
+                  <svg className="w-4 h-4 text-[#B58A3A] opacity-90 mb-2 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" />
                   </svg>
                   
-                  <p className="text-base md:text-lg font-medium leading-snug text-white mb-5 line-clamp-4 shadow-black drop-shadow-md">
+                  <p className="text-xs md:text-sm font-medium leading-snug text-[#F8F5EE] mb-4 line-clamp-4 drop-shadow-md">
                     {t.quote}
                   </p>
                   
-                  <div className="flex items-center gap-3 border-t border-white/20 pt-4">
-                    {/* Optional: Add an avatar placeholder here if you want it to look exactly like an IG profile */}
-                    <div className="w-8 h-8 rounded-full bg-white/20 border border-white/30 flex-shrink-0 flex items-center justify-center text-xs font-bold">
+                  <div className="flex items-center gap-2.5 border-t border-white/20 pt-3">
+                    <div className="w-7 h-7 rounded-full bg-[#B58A3A] flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white shadow-md">
                       {t.name.charAt(0)}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold tracking-wide text-white drop-shadow-md">
+                      <h4 className="text-xs font-bold tracking-wide text-white drop-shadow-md">
                         {t.name}
                       </h4>
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-white/70 mt-0.5 drop-shadow-md">
+                      <p className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest text-[#E9DFCE]/80 mt-0.5 drop-shadow-md">
                         {t.role}
                       </p>
                     </div>

@@ -8,6 +8,7 @@ import ServicesSection from '../HomePage/ServicesSection';
 import TestimonialsSection from '../HomePage/TestimonialSection';
 import InstagramSection from './Instagram';
 import WhyChooseUsSection from '../HomePage/WhyChooseUs';
+import VideoShowcaseSection from './VideoSection';
 
 const Home = () => {
 
@@ -68,11 +69,13 @@ const Home = () => {
       {/* --- PAGE SECTIONS --- */}
       <div className="relative z-10 flex flex-col">
         <HeroSection /> 
+
+        <VideoShowcaseSection />
         <AboutSection />
-        <InstagramSection />
         <ProjectsSection />
         <ServicesSection />
         <WhyChooseUsSection />
+        <InstagramSection />
         <TestimonialsSection />
       </div>
 

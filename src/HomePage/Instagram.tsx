@@ -27,12 +27,10 @@ const InstagramIcon = ({ size = 24, strokeWidth = 2, className = "" }) => (
   </svg>
 );
 
-// Added high-quality poster images for ALL posts. 
-// NOTE: videoSrc requires a direct .mp4 link, not an instagram.com/reel link.
 const igPosts = [
   { 
     id: 1, 
-    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", // Replace with your local video: "/videos/reel1.mp4"
+    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", 
     poster: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&h=750&auto=format&fit=crop", 
     title: "Project: Jubilee Hills" 
   },
@@ -79,32 +77,32 @@ export default function SocialJournalSection() {
   const headerRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  // State to track which card is currently in the center
-  const [activeIndex, setActiveIndex] = useState(1); // Start at index 1 so there's one on the left
+  const [activeIndex, setActiveIndex] = useState(1); 
 
   useGSAP(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 75%",
+        start: "top 90%", // Triggers exactly when entering the viewport
       }
     });
 
-    // Fade in centered text
-    tl.fromTo(headerRef.current?.children ? Array.from(headerRef.current.children) : [],
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }
-    );
+    // Fade in centered text snappily
+    if (headerRef.current) {
+      tl.fromTo(Array.from(headerRef.current.children),
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }
+      );
+    }
 
     // Fade in carousel container
     tl.fromTo(carouselRef.current,
       { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 1, ease: "power3.out" },
-      "-=0.4"
+      { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" },
+      "-=0.2"
     );
   }, { scope: sectionRef });
 
-  // Navigation Handlers
   const handleNext = () => {
     setActiveIndex((prev) => Math.min(prev + 1, igPosts.length - 1));
   };
@@ -113,48 +111,47 @@ export default function SocialJournalSection() {
     setActiveIndex((prev) => Math.max(prev - 1, 0));
   };
 
-  // Logic to determine classes based on card position relative to the active index
   const getCardStyle = (index: number) => {
     const diff = index - activeIndex;
 
     if (diff === 0) {
-      // CENTER CARD: Large, fully visible, on top
-      return "z-30 scale-100 opacity-100 translate-x-0 shadow-2xl";
+      // CENTER CARD
+      return "z-30 scale-100 opacity-100 translate-x-0 shadow-[0_25px_60px_rgba(57,52,45,0.2)]";
     } else if (diff === -1) {
-      // LEFT CARD: Scaled down, pushed left
-      return "z-20 scale-[0.80] md:scale-[0.85] opacity-60 -translate-x-[60%] md:-translate-x-[70%] cursor-pointer hover:opacity-80 shadow-lg";
+      // LEFT CARD
+      return "z-20 scale-[0.80] md:scale-[0.85] opacity-60 -translate-x-[55%] sm:-translate-x-[60%] md:-translate-x-[70%] cursor-pointer hover:opacity-80 shadow-lg";
     } else if (diff === 1) {
-      // RIGHT CARD: Scaled down, pushed right
-      return "z-20 scale-[0.80] md:scale-[0.85] opacity-60 translate-x-[60%] md:translate-x-[70%] cursor-pointer hover:opacity-80 shadow-lg";
+      // RIGHT CARD
+      return "z-20 scale-[0.80] md:scale-[0.85] opacity-60 translate-x-[55%] sm:translate-x-[60%] md:translate-x-[70%] cursor-pointer hover:opacity-80 shadow-lg";
     } else if (diff < -1) {
-      // FAR LEFT: Hidden
-      return "z-10 scale-75 opacity-0 -translate-x-[120%] pointer-events-none";
+      // FAR LEFT
+      return "z-10 scale-75 opacity-0 -translate-x-[110%] md:-translate-x-[120%] pointer-events-none";
     } else {
-      // FAR RIGHT: Hidden
-      return "z-10 scale-75 opacity-0 translate-x-[120%] pointer-events-none";
+      // FAR RIGHT
+      return "z-10 scale-75 opacity-0 translate-x-[110%] md:translate-x-[120%] pointer-events-none";
     }
   };
 
   return (
     <section 
       ref={sectionRef} 
-      className="relative w-full bg-[#050505] text-white py-24 md:py-32 overflow-hidden border-t border-white/5"
+      className="relative w-full bg-[#F8F5EE] text-[#39342D] py-20 md:py-32 overflow-hidden border-t border-[#B58A3A]/10 font-sans"
     >
       <div className="container mx-auto px-4 md:px-8 max-w-[90rem]">
         
         {/* --- 1. TOP HEADER (CENTERED) --- */}
         <div ref={headerRef} className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 md:mb-20">
           
-          <div className="inline-flex items-center gap-2 mb-6 text-[#D4AF37] opacity-90 border border-[#D4AF37]/30 px-4 py-1.5 rounded-full">
+          <div className="inline-flex items-center gap-2 mb-6 text-[#B58A3A] bg-[#B58A3A]/10 border border-[#B58A3A]/30 px-4 py-1.5 rounded-full">
             <InstagramIcon size={14} strokeWidth={1.5} />
-            <span className="text-xs font-mono tracking-widest uppercase">Live Journal</span>
+            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase">Live Journal</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] mb-6">
-            Join 70,000+ homeowners tracking our <span className="text-[#D4AF37] italic font-light">latest work.</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] mb-6 text-[#39342D]">
+            Join 78,000+ homeowners tracking our <span className="text-[#B58A3A] italic font-light">latest work.</span>
           </h2>
           
-          <p className="text-base md:text-lg text-white/60 font-light leading-relaxed mb-8 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-[#8A8175] font-light leading-relaxed mb-8 max-w-xl mx-auto">
             Step inside our active sites. We share daily architectural details, material selections, and the thought process behind our signature spaces.
           </p>
 
@@ -162,10 +159,13 @@ export default function SocialJournalSection() {
             href="https://www.instagram.com/thezencraftinteriors/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center gap-3 bg-[#D4AF37] text-[#1B1B1D] px-8 py-4 rounded-full font-bold text-xs tracking-[0.2em] uppercase hover:bg-white transition-all duration-300 shadow-lg shadow-[#D4AF37]/20 hover:shadow-white/20 hover:scale-105"
+            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#B58A3A] bg-[#B58A3A] px-7 py-3.5 font-body text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 ease-out hover:bg-[#39342D] hover:border-[#39342D] hover:shadow-[0_0_25px_rgba(181,138,58,0.4)] active:scale-95"
           >
-            Follow @Zencraft
-            <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <span className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
+            <div className="relative flex items-center gap-2">
+              <span>Follow @Zencraft</span>
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </div>
           </a>
 
         </div>
@@ -173,16 +173,14 @@ export default function SocialJournalSection() {
         {/* --- 2. 3D COVER-FLOW CAROUSEL WITH VIDEOS --- */}
         <div 
           ref={carouselRef} 
-          className="relative w-full max-w-5xl mx-auto h-[400px] md:h-[550px] flex items-center justify-center"
+          className="relative w-full max-w-5xl mx-auto h-[380px] sm:h-[450px] md:h-[550px] flex items-center justify-center"
         >
           {igPosts.map((post, index) => (
             <div 
               key={post.id}
-              onClick={() => setActiveIndex(index)} // Clicking a side card makes it center
-              className={`absolute w-[260px] sm:w-[320px] md:w-[400px] h-[340px] sm:h-[420px] md:h-[500px] rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${getCardStyle(index)} bg-black`}
+              onClick={() => setActiveIndex(index)}
+              className={`absolute w-[240px] sm:w-[320px] md:w-[400px] h-[320px] sm:h-[420px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${getCardStyle(index)} bg-[#39342D] border border-[#B58A3A]/20`}
             >
-              {/* VIDEO ELEMENT */}
-              {/* Note: AutoPlay relies on the browser allowing it. Mobile browsers require 'muted' and 'playsInline' for autoplay to work. */}
               <video 
                 src={post.videoSrc} 
                 poster={post.poster}
@@ -193,17 +191,16 @@ export default function SocialJournalSection() {
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
 
-              {/* Gradient Overlay & Text (Only fully visible when active) */}
-              <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-8 transition-opacity duration-500 pointer-events-none ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}>
-                <p className="text-white font-medium text-lg md:text-xl">
+              {/* Gradient Overlay & Text */}
+              <div className={`absolute inset-0 bg-gradient-to-t from-[#39342D]/95 via-[#39342D]/30 to-transparent flex flex-col justify-end p-5 md:p-8 transition-opacity duration-500 pointer-events-none ${index === activeIndex ? 'opacity-100' : 'opacity-0'}`}>
+                <p className="text-[#F8F5EE] font-karlen text-lg md:text-xl">
                   {post.title}
                 </p>
                 <a 
                   href="https://www.instagram.com/thezencraftinteriors/" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  // Restore pointer events just for the link so it's clickable
-                  className="pointer-events-auto flex items-center gap-2 text-[#D4AF37] mt-3 text-xs font-bold tracking-[0.1em] uppercase hover:text-white transition-colors w-fit"
+                  className="pointer-events-auto flex items-center gap-2 text-[#B58A3A] mt-2 text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase hover:text-[#F8F5EE] transition-colors w-fit"
                 >
                   <span>View Post</span>
                   <ArrowUpRight size={14} />
@@ -216,17 +213,17 @@ export default function SocialJournalSection() {
           <button 
             onClick={handlePrev}
             disabled={activeIndex === 0}
-            className="absolute left-0 md:-left-8 z-40 w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all disabled:opacity-0 hover:bg-white hover:text-black disabled:cursor-not-allowed"
+            className="absolute left-2 md:-left-8 z-40 w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#B58A3A]/30 bg-white/60 backdrop-blur-md flex items-center justify-center text-[#39342D] transition-all disabled:opacity-0 hover:bg-[#B58A3A] hover:text-white hover:border-[#B58A3A] disabled:cursor-not-allowed shadow-md"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} className="md:w-6 md:h-6" />
           </button>
 
           <button 
             onClick={handleNext}
             disabled={activeIndex === igPosts.length - 1}
-            className="absolute right-0 md:-right-8 z-40 w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all disabled:opacity-0 hover:bg-white hover:text-black disabled:cursor-not-allowed"
+            className="absolute right-2 md:-right-8 z-40 w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#B58A3A]/30 bg-white/60 backdrop-blur-md flex items-center justify-center text-[#39342D] transition-all disabled:opacity-0 hover:bg-[#B58A3A] hover:text-white hover:border-[#B58A3A] disabled:cursor-not-allowed shadow-md"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} className="md:w-6 md:h-6" />
           </button>
         </div>
 
