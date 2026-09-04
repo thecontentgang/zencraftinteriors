@@ -12,37 +12,32 @@ const timelineSteps = [
   {
     id: 'step-1',
     num: '01',
-    title: 'Consultation & Concept',
-    desc: 'We begin by understanding your lifestyle, functional needs, and aesthetic vision. Our team drafts initial space layouts and mood boards to establish a clear design direction.',
-    img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop'
+    title: 'Consultation',
+    img: '/consultation.png'
   },
   {
     id: 'step-2',
     num: '02',
-    title: 'High-Fidelity 3D Visualization',
-    desc: 'See it before we build it. We construct your entire home in photorealistic 3D, allowing you to experience the lighting, textures, and scale, eliminating all guesswork.',
-    img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop'
+    title: 'Concept & Design',
+    img: '/concept-design.png'
   },
   {
     id: 'step-3',
     num: '03',
-    title: 'Factory-Precision Manufacturing',
-    desc: 'Your custom cabinetry, millwork, and furniture are engineered in our state-of-the-art facilities. This ensures absolute precision and zero hidden costs before arriving at your home.',
-    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop'
+    title: 'Material Selection',
+    img: 'material-selection.webp'
   },
   {
     id: 'step-4',
     num: '04',
-    title: 'Dedicated Site Execution',
-    desc: 'Forget chasing contractors. You receive a single dedicated project manager who handles all heavy lifting, site supervision, and daily quality control on your behalf.',
-    img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop'
+    title: 'Site Execution',
+    img: '/site-execution.webp'
   },
   {
     id: 'step-5',
     num: '05',
-    title: 'Handover & 5-Year Warranty',
-    desc: 'We deliver your sanctuary on the guaranteed timeline, meticulously styled and ready for living. Every project comes backed by our comprehensive 5-year structural warranty.',
-    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop'
+    title: 'Handover',
+    img: '/handover.webp'
   }
 ];
 
@@ -54,7 +49,7 @@ const WhyChooseUsTimeline: React.FC = () => {
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
-    // 1. Header Reveal (Fast trigger as it enters the viewport)
+    // 1. Header Reveal
     gsap.fromTo(".why-header-el", 
       { opacity: 0, y: 20 }, 
       { 
@@ -72,7 +67,7 @@ const WhyChooseUsTimeline: React.FC = () => {
           ease: "none",
           scrollTrigger: {
             trigger: ".timeline-container",
-            start: "top 85%", // Starts drawing earlier
+            start: "top 85%", 
             end: "bottom 90%", 
             scrub: true,
           }
@@ -96,7 +91,7 @@ const WhyChooseUsTimeline: React.FC = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: step,
-            start: "top 90%", // Instant trigger upon entering viewport
+            start: "top 90%", 
             toggleActions: "play none none reverse"
           }
         });
@@ -107,15 +102,14 @@ const WhyChooseUsTimeline: React.FC = () => {
           { backgroundColor: "#B58A3A", borderColor: "#B58A3A", scale: 1, duration: 0.3, ease: "back.out(2)" }
         );
 
-        // Determine X-axis starting position based on device
-        // Mobile: Always slide from the right (positive X). Desktop: Alternate left/right.
+        // Mobile: slide from right. Desktop: alternate left/right.
         const startX = isMobile ? 40 : (isEven ? 40 : -40);
 
         // Fast Card Slide-in
         tl.fromTo(card,
           { opacity: 0, x: startX, y: 15 },
           { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power2.out" },
-          "-=0.15" // Snappy overlap with the dot
+          "-=0.15" 
         );
       });
     });
@@ -132,7 +126,10 @@ const WhyChooseUsTimeline: React.FC = () => {
         
         {/* --- HEADER --- */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-32 flex flex-col items-center">
-          
+          <span className="why-header-el inline-flex items-center gap-2 px-3.5 py-1 mb-6 rounded-full text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase text-[#B58A3A] bg-[#B58A3A]/10 border border-[#B58A3A]/20 backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#B58A3A] animate-pulse shadow-[0_0_8px_#B58A3A]" />
+            The Zencraft Standard
+          </span>
           <h2 className="why-header-el text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] text-[#39342D] mb-4 md:mb-6">
             Our Proven <br className="hidden md:block" />
             <span className="text-[#B58A3A] italic font-light">Journey.</span>
@@ -168,35 +165,28 @@ const WhyChooseUsTimeline: React.FC = () => {
                   {/* Desktop Alternating Spacer */}
                   <div className={`hidden md:block w-5/12 ${isEven ? 'order-1' : 'order-3'}`} />
 
-                  {/* The Content Card */}
+                  {/* The Premium Image + Text Block */}
                   <div className={`w-full md:w-5/12 pl-[64px] md:pl-0 ${isEven ? 'order-3' : 'order-1'}`}>
-                    <div className="timeline-card group bg-white/80 backdrop-blur-xl border border-[#B58A3A]/20 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-[0_15px_40px_rgba(57,52,45,0.06)] hover:border-[#B58A3A]/40 hover:shadow-[0_20px_50px_rgba(57,52,45,0.1)] transition-all duration-500">
+                    
+                    <div className="timeline-card group w-full flex flex-col rounded-xl md:rounded-2xl overflow-hidden shadow-[0_15px_40px_rgba(57,52,45,0.08)] border border-[#B58A3A]/20 transition-all duration-500 hover:shadow-[0_25px_50px_rgba(181,138,58,0.15)] hover:border-[#B58A3A]/50 bg-[#B58A3A]">
                       
-                      {/* Card Image */}
-                      <div className="relative w-full h-44 sm:h-56 md:h-64 overflow-hidden">
+                      {/* Top: Image Section */}
+                      <div className="relative w-full h-[220px] sm:h-[280px] md:h-[340px] overflow-hidden">
                         <img 
                           src={step.img} 
                           alt={step.title} 
-                          className="absolute inset-0 w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+                          className="absolute inset-0 w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-1000 ease-out"
                         />
-                        {/* Soft overlay so the badge stands out without using heavy black */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#39342D]/40 to-transparent" />
                         
-                        {/* Number Badge */}
-                        <div className="absolute bottom-4 left-4 md:left-6 inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-[#B58A3A]/20 text-[#B58A3A] font-karlen text-lg shadow-md">
+                        <div className="absolute inset-0 bg-[#39342D]/10 pointer-events-none group-hover:bg-transparent transition-colors duration-700" />
+                        
+                        {/* Floating Number Badge */}
+                        <div className="absolute top-4 left-4 md:top-6 md:left-6 inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#F8F5EE]/90 backdrop-blur-md border border-[#B58A3A]/40 text-[#B58A3A] font-karlen text-lg md:text-xl shadow-lg z-10 group-hover:bg-[#B58A3A] group-hover:text-[#F8F5EE] group-hover:border-[#B58A3A] transition-colors duration-500">
                           {step.num}
                         </div>
                       </div>
 
-                      {/* Card Text */}
-                      <div className="p-5 md:p-8 pt-6 md:pt-8">
-                        <h3 className="text-xl md:text-2xl font-karlen text-[#39342D] mb-2 md:mb-3 group-hover:text-[#B58A3A] transition-colors duration-300">
-                          {step.title}
-                        </h3>
-                        <p className="text-[13px] md:text-sm text-[#8A8175] font-light leading-relaxed">
-                          {step.desc}
-                        </p>
-                      </div>
+                      
 
                     </div>
                   </div>

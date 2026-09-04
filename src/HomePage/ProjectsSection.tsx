@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useModal } from '../components/ModalContext';
+import CtaSection from './CtaSection';
+
+
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -87,7 +89,6 @@ const projects: Project[] = [
 
 const ProjectsSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { openModal } = useModal();
 
   useGSAP(() => {
     const cards = gsap.utils.toArray<HTMLElement>('.saas-card', containerRef.current);
@@ -142,7 +143,7 @@ const ProjectsSection: React.FC = () => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative w-full bg-[#F8F5EE] text-[#39342D] min-h-screen py-24 md:py-32 font-sans selection:bg-[#B58A3A] selection:text-white">
+    <div ref={containerRef} className="relative w-full bg-[#F8F5EE] text-[#39342D] min-h-screen pt-24 md:pt-32 font-sans selection:bg-[#B58A3A] selection:text-white">
 
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(181,138,58,0.06)_0%,rgba(0,0,0,0)_60%)] pointer-events-none" />
 
@@ -162,7 +163,7 @@ const ProjectsSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="relative flex flex-col gap-12 md:gap-24 pb-20">
+        <div className="relative flex flex-col gap-12 md:gap-24 pb-12">
           {projects.map((proj) => (
             <div
               key={proj.id}
@@ -171,8 +172,6 @@ const ProjectsSection: React.FC = () => {
 
               <div className="w-full lg:w-5/12 flex flex-col justify-between order-2 lg:order-1">
                 <div>
-
-
                   <h3 className="text-2xl sm:text-3xl md:text-5xl font-karlen tracking-tight leading-none mb-4 md:mb-6 text-[#F8F5EE]">
                     {proj.name}
                   </h3>
@@ -231,8 +230,8 @@ const ProjectsSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="cta-reveal mt-16 md:mt-24 flex flex-col items-center gap-12 w-full max-w-5xl mx-auto">
-          {/* Long View All Projects Button */}
+        {/* Long View All Projects Button */}
+        <div className="cta-reveal mt-12 md:mt-16 flex flex-col items-center w-full max-w-5xl mx-auto">
           <Link
             to="/projects"
             className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#B58A3A] bg-[#F8F5EE]/60 px-8 py-5 w-full max-w-md font-body text-xs font-semibold uppercase tracking-[0.2em] text-[#4A4032] transition-all duration-500 ease-out hover:border-[#B58A3A] hover:bg-[#B58A3A] hover:text-white hover:shadow-[0_0_30px_rgba(181,138,58,0.4)] active:scale-95"
@@ -246,36 +245,13 @@ const ProjectsSection: React.FC = () => {
               <span className="absolute translate-y-full transition-all duration-500 group-hover:translate-y-0 text-white font-bold leading-none">VIEW ALL PROJECTS</span>
             </div>
           </Link>
-
-          {/* CTA Card */}
-          <div className="w-full bg-[#39342D] text-[#F8F5EE] rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-xl border border-[#B58A3A]/20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#B58A3A]/10 blur-[80px] rounded-full pointer-events-none" />
-
-            <div className="relative z-10 max-w-xl text-center sm:text-left">
-              <span className="text-[10px] tracking-[0.2em] text-[#B58A3A] uppercase font-bold block mb-2">START YOUR JOURNEY</span>
-              <h3 className="text-2xl md:text-4xl font-karlen text-white mb-3">
-                Ready to transform your space?
-              </h3>
-              <p className="text-xs md:text-sm text-white/70 font-light leading-relaxed">
-                Connect with our lead designers to bring your bespoke vision to life with uncompromising elegance.
-              </p>
-            </div>
-
-            <div className="relative z-10 shrink-0 w-full sm:w-auto">
-              <button
-                onClick={openModal}
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#B58A3A] bg-[#B58A3A] px-7 py-3.5 w-full sm:w-auto font-body text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 ease-out hover:bg-white hover:text-[#39342D] hover:border-white hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] active:scale-95 cursor-pointer"
-              >
-                <span className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
-                <div className="relative flex flex-col items-center justify-center overflow-hidden h-[1.2em] w-full min-w-[150px]">
-                  <span className="transition-all duration-500 group-hover:-translate-y-full leading-none">CONSULTATION</span>
-                  <span className="absolute translate-y-full transition-all duration-500 group-hover:translate-y-0 font-bold leading-none">GET STARTED</span>
-                </div>
-              </button>
-            </div>
-          </div>
         </div>
 
+      </div>
+
+      {/* Replaced old CTA card with the dedicated CtaSection component */}
+      <div className="cta-reveal w-full mt-8">
+        <CtaSection />
       </div>
     </div>
   );

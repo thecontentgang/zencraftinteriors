@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useModal } from '../components/ModalContext';
+import { Link } from "react-router-dom";
 
 export default function HeroSection() {
   const { openModal } = useModal(); 
@@ -51,12 +52,12 @@ export default function HeroSection() {
           className="mt-14 sm:mt-16 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-xl"
         >
           {/* Secondary Button: View Projects */}
-          <button 
+          <Link to="/projects" 
             type="button"
             className="w-[85%] sm:w-auto max-w-[280px] sm:max-w-none flex items-center justify-center rounded-full border border-[#B58A3A] bg-transparent px-6 py-3.5 sm:px-8 sm:py-4 font-body text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#4A4032] shadow-sm transition-all duration-500 ease-out hover:bg-[#B58A3A] hover:text-white hover:shadow-[0_8px_20px_rgba(181,138,58,0.2)] active:scale-95 cursor-pointer"
           >
             View Projects
-          </button>
+          </Link>
 
           {/* Primary Button: Book Consultation */}
           <button 

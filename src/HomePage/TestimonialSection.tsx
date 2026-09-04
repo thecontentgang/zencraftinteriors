@@ -30,7 +30,7 @@ const testimonials = [
   {
     id: 4,
     videoSrc: "/testimonials/testimonial-4.mp4",
-    quote: "No hidden costs, no missed deadlines. The sanctuary they crafted for us is deeply personal and perfectly balanced for our family.",
+
     name: "Srinivasa Rao",
     role: "Homeowner, Secunderabad"
   },
@@ -242,13 +242,8 @@ const HorizontalVideoTestimonials: React.FC = () => {
 
                 {/* 3. Text Content */}
                 <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 flex flex-col justify-end pointer-events-none">
-                  <svg className="w-4 h-4 text-[#B58A3A] opacity-90 mb-2 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" />
-                  </svg>
                   
-                  <p className="text-xs md:text-sm font-medium leading-snug text-[#F8F5EE] mb-4 line-clamp-4 drop-shadow-md">
-                    {t.quote}
-                  </p>
+                 
                   
                   <div className="flex items-center gap-2.5 border-t border-white/20 pt-3">
                     <div className="w-7 h-7 rounded-full bg-[#B58A3A] flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white shadow-md">

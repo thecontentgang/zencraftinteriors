@@ -9,6 +9,7 @@ import TestimonialsSection from '../HomePage/TestimonialSection';
 import InstagramSection from './Instagram';
 import WhyChooseUsSection from '../HomePage/WhyChooseUs';
 import VideoShowcaseSection from './VideoSection';
+import CtaSection from './CtaSection';
 
 const Home = () => {
 
@@ -35,10 +36,9 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-x-hidden selection:bg-sand selection:text-primary z-10">
+    <main className="relative min-h-screen w-full bg-transparent font-body text-surface overflow-x-hidden selection:bg-sand selection:text-primary z-10">
       
-      {/* --- GLOBAL HOMEPAGE ANIMATIONS --- */}
-      {/* Putting this here ensures all your sections share the exact same easing and timing */}
+     
       <style>{`
         .reveal-on-scroll {
           opacity: 0;
@@ -77,6 +77,7 @@ const Home = () => {
         <WhyChooseUsSection />
         <InstagramSection />
         <TestimonialsSection />
+        <CtaSection />
       </div>
 
     </main>
