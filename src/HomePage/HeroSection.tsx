@@ -8,7 +8,7 @@ export default function HeroSection() {
 
   return (
     // Base background set to Ivory to match the navbar's light theme
-    <div className="relative w-full h-screen overflow-hidden bg-[#F8F5EE] flex flex-col items-center justify-center">
+    <div className="relative w-full h-[100dvh] min-h-[650px] overflow-hidden bg-[#F8F5EE] flex flex-col items-center justify-center">
 
       {/* --- CINEMATIC BACKGROUND IMAGE --- */}
       <div className="absolute inset-0 z-0">
