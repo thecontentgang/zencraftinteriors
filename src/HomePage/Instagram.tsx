@@ -27,7 +27,6 @@ const InstagramIcon = ({ size = 24, strokeWidth = 2, className = "" }) => (
   </svg>
 );
 
-// Removed static poster images
 const igPosts = [
   { 
     id: 1, 
@@ -55,8 +54,10 @@ export default function SocialJournalSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const [activeIndex, setActiveIndex] = useState(1); 
+  const [playingId, setPlayingId] = useState<number | null>(null);
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -66,7 +67,6 @@ export default function SocialJournalSection() {
       }
     });
 
-    // Fade in centered text snappily
     if (headerRef.current) {
       tl.fromTo(Array.from(headerRef.current.children),
         { opacity: 0, y: 25 },
@@ -74,7 +74,6 @@ export default function SocialJournalSection() {
       );
     }
 
-    // Fade in carousel container
     tl.fromTo(carouselRef.current,
       { opacity: 0, scale: 0.95 },
       { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" },
@@ -82,31 +81,55 @@ export default function SocialJournalSection() {
     );
   }, { scope: sectionRef });
 
+  const pauseCurrentVideo = () => {
+    if (playingId !== null && videoRefs.current[playingId]) {
+      videoRefs.current[playingId]?.pause();
+      setPlayingId(null);
+    }
+  };
+
   const handleNext = () => {
+    pauseCurrentVideo();
     setActiveIndex((prev) => Math.min(prev + 1, igPosts.length - 1));
   };
 
   const handlePrev = () => {
+    pauseCurrentVideo();
     setActiveIndex((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleCardClick = (index: number) => {
+    if (index !== activeIndex) {
+      // If clicking a side card, bring it to center and pause current
+      pauseCurrentVideo();
+      setActiveIndex(index);
+    } else {
+      // If clicking the center card, toggle play/pause
+      const video = videoRefs.current[index];
+      if (!video) return;
+
+      if (playingId === index) {
+        video.pause();
+        setPlayingId(null);
+      } else {
+        video.play();
+        setPlayingId(index);
+      }
+    }
   };
 
   const getCardStyle = (index: number) => {
     const diff = index - activeIndex;
 
     if (diff === 0) {
-      // CENTER CARD
-      return "z-30 scale-100 opacity-100 translate-x-0 shadow-[0_25px_60px_rgba(57,52,45,0.2)]";
+      return "z-30 scale-100 opacity-100 translate-x-0 shadow-[0_25px_60px_rgba(57,52,45,0.2)] cursor-pointer";
     } else if (diff === -1) {
-      // LEFT CARD
       return "z-20 scale-[0.80] md:scale-[0.85] opacity-60 -translate-x-[55%] sm:-translate-x-[60%] md:-translate-x-[70%] cursor-pointer hover:opacity-80 shadow-lg";
     } else if (diff === 1) {
-      // RIGHT CARD
       return "z-20 scale-[0.80] md:scale-[0.85] opacity-60 translate-x-[55%] sm:translate-x-[60%] md:translate-x-[70%] cursor-pointer hover:opacity-80 shadow-lg";
     } else if (diff < -1) {
-      // FAR LEFT
       return "z-10 scale-75 opacity-0 -translate-x-[110%] md:-translate-x-[120%] pointer-events-none";
     } else {
-      // FAR RIGHT
       return "z-10 scale-75 opacity-0 translate-x-[110%] md:translate-x-[120%] pointer-events-none";
     }
   };
@@ -154,26 +177,52 @@ export default function SocialJournalSection() {
           ref={carouselRef} 
           className="relative w-full max-w-5xl mx-auto h-[380px] sm:h-[450px] md:h-[550px] flex items-center justify-center"
         >
-          {igPosts.map((post, index) => (
-            <div 
-              key={post.id}
-              onClick={() => setActiveIndex(index)}
-              className={`absolute w-[240px] sm:w-[320px] md:w-[400px] h-[320px] sm:h-[420px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${getCardStyle(index)} bg-[#39342D] border border-[#B58A3A]/20`}
-            >
-              {/* VIDEO ELEMENT: No poster, using #t=0.001 to force first frame */}
-              <video 
-                src={`${post.videoSrc}#t=0.001`}
-                preload="metadata"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
+          {igPosts.map((post, index) => {
+            const isPlaying = playingId === index;
+            const isActive = activeIndex === index;
 
-              
-            </div>
-          ))}
+            return (
+              <div 
+                key={post.id}
+                onClick={() => handleCardClick(index)}
+                className={`absolute w-[240px] sm:w-[320px] md:w-[400px] h-[320px] sm:h-[420px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${getCardStyle(index)} bg-[#39342D] border border-[#B58A3A]/20 group`}
+              >
+                {/* VIDEO ELEMENT: No autoPlay, no muted, using #t=0.001 to force first frame */}
+                <video 
+                  ref={(el) => { videoRefs.current[index] = el; }}
+                  src={`${post.videoSrc}#t=0.001`}
+                  preload="metadata"
+                  loop
+                  playsInline
+                  className={`w-full h-full object-cover transition-transform duration-1000 ${!isPlaying && 'group-hover:scale-105'}`}
+                />
+
+                {/* Dark overlay to make play button visible */}
+                <div className={`absolute inset-0 bg-black/20 transition-opacity duration-300 pointer-events-none ${isPlaying ? 'opacity-0' : 'opacity-100'}`} />
+
+                {/* Play/Pause UI Button (Only visible on the active center card) */}
+                {isActive && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                    <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 ${isPlaying ? 'bg-black/40 opacity-0 scale-90' : 'bg-white/90 shadow-lg group-hover:bg-[#B58A3A] group-hover:text-white opacity-100 scale-100 text-[#39342D]'}`}>
+                      <svg className="w-6 h-6 ml-1 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
+
+                {/* Playing Indicator */}
+                {isPlaying && (
+                  <div className="absolute top-5 right-5 flex gap-1 items-end h-3 z-10">
+                    <span className="w-1 h-1.5 bg-[#B58A3A] animate-[bounce_1s_infinite]" />
+                    <span className="w-1 h-2.5 bg-[#B58A3A] animate-[bounce_1.2s_infinite]" />
+                    <span className="w-1 h-3.5 bg-[#B58A3A] animate-[bounce_0.8s_infinite]" />
+                  </div>
+                )}
+
+              </div>
+            );
+          })}
 
           {/* Nav Buttons (Left/Right of Carousel) */}
           <button 
