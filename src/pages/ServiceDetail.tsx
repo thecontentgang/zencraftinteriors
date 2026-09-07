@@ -199,7 +199,7 @@ const ServiceDetail: React.FC = () => {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-x-hidden selection:bg-sand selection:text-primary z-10">
+    <main className="relative min-h-screen w-full bg-background font-body text-text-primary overflow-x-hidden selection:bg-primary selection:text-white z-10">
       
       <style>{`
         .clip-mask { overflow: hidden; padding-bottom: 0.15em; }
@@ -215,35 +215,35 @@ const ServiceDetail: React.FC = () => {
       `}</style>
 
       {/* --- 1. PREMIUM CENTERED HERO --- */}
-      <section className="relative w-full pt-40 pb-20 px-4 sm:px-6 lg:px-12 bg-primary flex flex-col items-center text-center hero-reveal">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-96 bg-secondary/10 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <section className="relative w-full pt-40 pb-20 px-4 sm:px-6 lg:px-12 bg-light flex flex-col items-center text-center hero-reveal">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none -z-10" />
         <div className="max-w-4xl w-full flex flex-col items-center">
           
           <div className="clip-mask mb-8">
             <div className="flex items-center justify-center gap-4 slide-up-text" style={{ transitionDelay: '0s' }}>
-              <span className="w-8 md:w-16 h-px bg-secondary" />
-              <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-secondary">
+              <span className="w-8 md:w-16 h-px bg-gold" />
+              <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-gold">
                 Service {data.id}
               </span>
-              <span className="w-8 md:w-16 h-px bg-secondary" />
+              <span className="w-8 md:w-16 h-px bg-gold" />
             </div>
           </div>
           
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] font-karlen text-white leading-[0.95] tracking-tight mb-8">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] font-karlen text-text-primary leading-[0.95] tracking-tight mb-8">
             <div className="clip-mask">
               <div className="slide-up-text" style={{ transitionDelay: '0.1s' }}>
                 {data.title}
               </div>
             </div>
             <div className="clip-mask">
-              <div className="slide-up-text text-sand italic font-light" style={{ transitionDelay: '0.2s' }}>
+              <div className="slide-up-text text-text-secondary italic font-light" style={{ transitionDelay: '0.2s' }}>
                 {data.subtitle}
               </div>
             </div>
           </h1>
           
           <div className="clip-mask max-w-2xl mx-auto">
-            <p className="slide-up-text text-sm md:text-base text-white/60 font-light leading-relaxed" style={{ transitionDelay: '0.3s' }}>
+            <p className="slide-up-text text-sm md:text-base text-text-secondary font-light leading-relaxed" style={{ transitionDelay: '0.3s' }}>
               {data.description}
             </p>
           </div>
@@ -252,9 +252,9 @@ const ServiceDetail: React.FC = () => {
       </section>
 
       {/* --- 2. CENTRAL-AXIS ALTERNATING TIMELINE --- */}
-      <section className="relative w-full py-20 md:py-32 px-4 sm:px-6 lg:px-12 bg-primary">
+      <section className="relative w-full py-20 md:py-32 px-4 sm:px-6 lg:px-12 bg-surface">
         <div className="max-w-6xl mx-auto relative">
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-white/15 to-transparent z-0" />
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-gold/15 to-transparent z-0" />
 
           <div className="flex flex-col gap-24 md:gap-32">
             {data.phases.map((phase, index) => {
@@ -263,41 +263,41 @@ const ServiceDetail: React.FC = () => {
               return (
                 <div key={phase.id} className="reveal-group group relative flex flex-col md:flex-row items-center w-full">
                   <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-16 h-16 items-center justify-center z-20">
-                    <div className="w-3 h-3 rounded-full bg-primary border-2 border-secondary group-hover:scale-150 group-hover:bg-secondary transition-all duration-500 ease-buttery slide-up-fade" style={{ transitionDelay: '0.2s' }} />
+                    <div className="w-3 h-3 rounded-full bg-surface border-2 border-gold group-hover:scale-150 group-hover:bg-gold transition-all duration-500 ease-buttery slide-up-fade" style={{ transitionDelay: '0.2s' }} />
                   </div>
 
                   <div className={`w-full md:w-1/2 flex ${isEven ? 'md:pr-16 lg:pr-24 justify-end order-1' : 'md:pl-16 lg:pl-24 justify-start order-1 md:order-2'} mb-10 md:mb-0 z-10`}>
                     <div className="image-wrapper w-full max-w-sm lg:max-w-md aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl relative" style={{ transitionDelay: isEven ? '0s' : '0.2s' }}>
                       <img src={phase.image} alt={phase.title} className="image-inner w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-[filter,transform] duration-1000 ease-buttery" />
-                      <div className="absolute inset-0 border border-white/10 rounded-[2rem] pointer-events-none" />
-                      <div className="md:hidden absolute top-4 left-4 bg-primary/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 slide-up-fade" style={{ transitionDelay: '0.4s' }}>
-                        <span className="text-[10px] font-bold tracking-widest text-secondary">PHASE {phase.id}</span>
+                      <div className="absolute inset-0 border border-primary/20 rounded-[2rem] pointer-events-none" />
+                      <div className="md:hidden absolute top-4 left-4 bg-surface/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-gold/20 slide-up-fade" style={{ transitionDelay: '0.4s' }}>
+                        <span className="text-[10px] font-bold tracking-widest text-gold">PHASE {phase.id}</span>
                       </div>
                     </div>
                   </div>
 
                   <div className={`w-full md:w-1/2 flex flex-col justify-center z-10 ${isEven ? 'md:pl-16 lg:pl-24 order-2' : 'md:pr-16 lg:pr-24 md:items-end md:text-right order-2 md:order-1'}`}>
                     <div className="clip-mask hidden md:block mb-4">
-                      <span className="slide-up-text block text-[10px] font-bold tracking-[0.3em] uppercase text-secondary" style={{ transitionDelay: isEven ? '0.2s' : '0s' }}>
+                      <span className="slide-up-text block text-[10px] font-bold tracking-[0.3em] uppercase text-gold" style={{ transitionDelay: isEven ? '0.2s' : '0s' }}>
                         Phase {phase.id}
                       </span>
                     </div>
 
                     <div className="clip-mask mb-6">
-                      <h3 className="slide-up-text text-3xl md:text-4xl font-karlen text-white group-hover:text-sand transition-colors duration-500 ease-buttery" style={{ transitionDelay: isEven ? '0.3s' : '0.1s' }}>
+                      <h3 className="slide-up-text text-3xl md:text-4xl font-karlen text-text-primary group-hover:text-gold transition-colors duration-500 ease-buttery" style={{ transitionDelay: isEven ? '0.3s' : '0.1s' }}>
                         {phase.title}
                       </h3>
                     </div>
                     
                     <div className="clip-mask mb-8">
-                      <p className={`slide-up-text text-sm md:text-base text-white/60 font-light leading-relaxed max-w-md ${isEven ? '' : 'md:ml-auto'}`} style={{ transitionDelay: isEven ? '0.4s' : '0.2s' }}>
+                      <p className={`slide-up-text text-sm md:text-base text-text-secondary font-light leading-relaxed max-w-md ${isEven ? '' : 'md:ml-auto'}`} style={{ transitionDelay: isEven ? '0.4s' : '0.2s' }}>
                         {phase.description}
                       </p>
                     </div>
 
                     <div className={`flex flex-wrap gap-2 slide-up-fade ${isEven ? '' : 'md:justify-end'}`} style={{ transitionDelay: isEven ? '0.5s' : '0.3s' }}>
                       {phase.deliverables.map((item, i) => (
-                        <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase text-white/80">
+                        <span key={i} className="px-4 py-2 bg-gold/10 border border-gold/20 rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase text-text-primary/80">
                           {item}
                         </span>
                       ))}
@@ -311,51 +311,51 @@ const ServiceDetail: React.FC = () => {
       </section>
 
       {/* --- 3. IMMERSIVE STATS/QUOTE BREAK --- */}
-      <section className="reveal-group relative w-full py-24 md:py-32 px-4 bg-primary border-y border-white/5">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+      <section className="reveal-group relative w-full py-24 md:py-32 px-4 bg-light border-y border-primary/10">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-primary/10">
           <div className="flex flex-col items-center justify-center pt-8 md:pt-0">
             <div className="clip-mask mb-2">
-              <span className="slide-up-text block text-5xl md:text-6xl font-karlen text-white" style={{ transitionDelay: '0s' }}>40<span className="text-secondary">+</span></span>
+              <span className="slide-up-text block text-5xl md:text-6xl font-karlen text-text-primary" style={{ transitionDelay: '0s' }}>40<span className="text-gold">+</span></span>
             </div>
             <div className="clip-mask">
-              <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-white/50" style={{ transitionDelay: '0.1s' }}>Completed Projects</span>
+              <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-text-secondary" style={{ transitionDelay: '0.1s' }}>Completed Projects</span>
             </div>
           </div>
           
           <div className="flex flex-col items-center justify-center pt-8 md:pt-0">
             <div className="clip-mask mb-2">
-              <span className="slide-up-text block text-5xl md:text-6xl font-karlen text-white" style={{ transitionDelay: '0.2s' }}>100<span className="text-secondary">%</span></span>
+              <span className="slide-up-text block text-5xl md:text-6xl font-karlen text-text-primary" style={{ transitionDelay: '0.2s' }}>100<span className="text-gold">%</span></span>
             </div>
             <div className="clip-mask">
-              <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-white/50" style={{ transitionDelay: '0.3s' }}>Turnkey Handover</span>
+              <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-text-secondary" style={{ transitionDelay: '0.3s' }}>Turnkey Handover</span>
             </div>
           </div>
           
           <div className="flex flex-col items-center justify-center pt-8 md:pt-0">
             <div className="clip-mask mb-2">
-              <span className="slide-up-text block text-5xl md:text-6xl font-karlen text-white" style={{ transitionDelay: '0.4s' }}>ROI</span>
+              <span className="slide-up-text block text-5xl md:text-6xl font-karlen text-gold" style={{ transitionDelay: '0.4s' }}>ROI</span>
             </div>
             <div className="clip-mask">
-              <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-white/50" style={{ transitionDelay: '0.5s' }}>Design-Driven Value</span>
+              <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-text-secondary" style={{ transitionDelay: '0.5s' }}>Design-Driven Value</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* --- 4. COMPACT NEXT SERVICE CTA --- */}
-      <section className="reveal-group relative w-full py-24 px-4 text-center bg-primary flex flex-col items-center">
+      <section className="reveal-group relative w-full py-24 px-4 text-center bg-light-alt flex flex-col items-center">
         <div className="clip-mask mb-6">
-          <span className="slide-up-text block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-white/40" style={{ transitionDelay: '0s' }}>
+          <span className="slide-up-text block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-text-secondary" style={{ transitionDelay: '0s' }}>
             Next Service
           </span>
         </div>
         
         {/* Changed to React Router Link */}
         <Link to={`/services/${data.nextServiceSlug}`} className="group flex items-center gap-6 slide-up-fade" style={{ transitionDelay: '0.2s' }}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-karlen text-white/50 group-hover:text-white transition-colors duration-700 ease-buttery">
-            {data.nextServiceName.split(' ')[0]} <span className="text-sand italic font-light opacity-50 group-hover:opacity-100 transition-opacity">{data.nextServiceName.split(' ').slice(1).join(' ')}</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-karlen text-text-secondary group-hover:text-text-primary transition-colors duration-700 ease-buttery">
+            {data.nextServiceName.split(' ')[0]} <span className="text-gold italic font-light opacity-80 group-hover:opacity-100 transition-opacity">{data.nextServiceName.split(' ').slice(1).join(' ')}</span>
           </h2>
-          <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover:border-secondary group-hover:text-primary group-hover:bg-secondary transition-all duration-500">
+          <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold group-hover:border-gold group-hover:text-gold group-hover:bg-secondary transition-all duration-500">
             <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7-7m7-7H3" />
             </svg>

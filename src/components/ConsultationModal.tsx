@@ -80,87 +80,153 @@ export default function ConsultationModal() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-3xl bg-primary border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl overflow-y-auto max-h-[90vh]"
+            className="relative w-full max-w-3xl bg-[#39342D] border border-[#B58A3A]/30 rounded-[2rem] p-6 md:p-10 shadow-[0_30px_70px_rgba(0,0,0,0.5)] overflow-y-auto max-h-[90vh]"
             onClick={(e) => e.stopPropagation()} 
           >
+            {/* Subtle Gold Glow Background inside Modal */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[radial-gradient(ellipse_at_center,rgba(181,138,58,0.15)_0%,rgba(0,0,0,0)_70%)] pointer-events-none -z-10" />
+
             <button
               onClick={closeModal}
-              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors uppercase tracking-widest text-[10px] font-bold z-10"
+              className="absolute top-6 right-6 text-[#E9DFCE]/50 hover:text-[#B58A3A] transition-colors uppercase tracking-widest text-[10px] font-bold z-10"
             >
               CLOSE ✕
             </button>
 
             {/* --- FORM START --- */}
-            <form onSubmit={handleSubmit} className="w-full space-y-4 text-left mt-4">
-              <div className="mb-2">
-                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-secondary">
+            <form onSubmit={handleSubmit} className="relative z-10 w-full space-y-5 text-left mt-2">
+              
+              {/* Header */}
+              <div className="mb-6">
+                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[#B58A3A]">
                   Free Consultation
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-karlen text-white mt-1 mb-1">
+                <h3 className="text-3xl sm:text-4xl font-karlen text-[#F8F5EE] mt-2 mb-2">
                   Transform Your Space
                 </h3>
-                <p className="text-white/60 font-sans tracking-wide text-xs">
+                <p className="text-[#E9DFCE]/70 font-sans font-light tracking-wide text-xs sm:text-sm">
                   Fill in the details — we'll respond within 24 hrs.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* Input Group: Name & Phone */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-[9px] font-bold tracking-widest uppercase text-secondary mb-1">Name</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Your Full Name" required className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white placeholder-white/30 focus:outline-none focus:border-secondary focus:bg-white/10 transition-all font-sans text-xs sm:text-sm" />
+                  <label htmlFor="name" className="block text-[9px] font-bold tracking-widest uppercase text-[#B58A3A] mb-1.5">
+                    Name
+                  </label>
+                  <input 
+                    type="text" 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleInputChange} 
+                    placeholder="Your Full Name" 
+                    required 
+                    className="w-full bg-[#F8F5EE]/5 border border-[#B58A3A]/30 rounded-lg px-4 py-3 text-[#F8F5EE] placeholder-[#E9DFCE]/30 focus:outline-none focus:border-[#B58A3A] focus:bg-[#F8F5EE]/10 transition-all font-sans text-xs sm:text-sm" 
+                  />
                 </div>
+                
                 <div>
-                  <label htmlFor="phone" className="block text-[9px] font-bold tracking-widest uppercase text-secondary mb-1">Phone</label>
-                  <div className="flex bg-white/5 border border-white/10 rounded-lg overflow-hidden focus-within:border-secondary focus-within:bg-white/10 transition-all">
-                    <div className="px-3 py-2 bg-white/5 border-r border-white/10 flex items-center justify-center">
-                      <span className="text-secondary font-semibold text-xs sm:text-sm">+91</span>
+                  <label htmlFor="phone" className="block text-[9px] font-bold tracking-widest uppercase text-[#B58A3A] mb-1.5">
+                    Phone
+                  </label>
+                  <div className="flex bg-[#F8F5EE]/5 border border-[#B58A3A]/30 rounded-lg overflow-hidden focus-within:border-[#B58A3A] focus-within:bg-[#F8F5EE]/10 transition-all">
+                    <div className="px-3 py-3 bg-[#F8F5EE]/10 border-r border-[#B58A3A]/30 flex items-center justify-center">
+                      <span className="text-[#B58A3A] font-semibold text-xs sm:text-sm">+91</span>
                     </div>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="9876543210" pattern="[0-9]{10}" required className="flex-1 bg-transparent px-3 py-2 text-white placeholder-white/30 focus:outline-none font-sans text-xs sm:text-sm tracking-wide" />
+                    <input 
+                      type="tel" 
+                      name="phone" 
+                      value={formData.phone} 
+                      onChange={handleInputChange} 
+                      placeholder="9876543210" 
+                      pattern="[0-9]{10}" 
+                      required 
+                      className="flex-1 bg-transparent px-4 py-3 text-[#F8F5EE] placeholder-[#E9DFCE]/30 focus:outline-none font-sans text-xs sm:text-sm tracking-wide" 
+                    />
                   </div>
                 </div>
               </div>
 
+              {/* Project Type */}
               <div>
-                <span className="block text-[9px] font-bold tracking-widest uppercase text-secondary mb-1.5">Project Type</span>
-                <div className="flex flex-wrap gap-2">
+                <span className="block text-[9px] font-bold tracking-widest uppercase text-[#B58A3A] mb-2">
+                  Project Type
+                </span>
+                <div className="flex flex-wrap gap-2.5">
                   {['Residential', 'Commercial'].map((category) => (
-                    <button key={category} type="button" onClick={() => handleSelectionChange('projectCategory', category)} className={`px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-medium tracking-wide transition-all duration-300 border ${formData.projectCategory === category ? 'bg-secondary border-secondary text-(--color-primary) shadow-[0_0_10px_rgba(220,200,163,0.3)]' : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:text-white'}`}>
+                    <button 
+                      key={category} 
+                      type="button" 
+                      onClick={() => handleSelectionChange('projectCategory', category)} 
+                      className={`px-4 py-2 rounded-lg text-[10px] sm:text-xs font-semibold tracking-widest uppercase transition-all duration-300 border ${
+                        formData.projectCategory === category 
+                          ? 'bg-[#B58A3A] border-[#B58A3A] text-[#F8F5EE] shadow-[0_0_15px_rgba(181,138,58,0.4)]' 
+                          : 'bg-[#F8F5EE]/5 border-[#B58A3A]/30 text-[#E9DFCE]/70 hover:border-[#B58A3A]/70 hover:text-[#F8F5EE]'
+                      }`}
+                    >
                       {category}
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${formData.projectCategory === 'Residential' ? 'max-h-25 opacity-100 mt-2' : 'max-h-0 opacity-0 m-0'}`}>
-                <span className="block text-[9px] font-bold tracking-widest uppercase text-secondary mb-1.5">Property Type</span>
-                <div className="flex flex-wrap gap-2">
+              {/* Property Type (Conditional) */}
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${formData.projectCategory === 'Residential' ? 'max-h-32 opacity-100 mt-4' : 'max-h-0 opacity-0 m-0'}`}>
+                <span className="block text-[9px] font-bold tracking-widest uppercase text-[#B58A3A] mb-2">
+                  Property Type
+                </span>
+                <div className="flex flex-wrap gap-2.5">
                   {['1 BHK', '2 BHK', '3 BHK', 'Villa'].map((type) => (
-                    <button key={type} type="button" onClick={() => handleSelectionChange('propertyType', type)} className={`px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-medium tracking-wide transition-all duration-300 border ${formData.propertyType === type ? 'bg-secondary border-secondary text-(--color-primary) shadow-[0_0_10px_rgba(220,200,163,0.3)]' : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:text-white'}`}>
+                    <button 
+                      key={type} 
+                      type="button" 
+                      onClick={() => handleSelectionChange('propertyType', type)} 
+                      className={`px-4 py-2 rounded-lg text-[10px] sm:text-xs font-semibold tracking-widest uppercase transition-all duration-300 border ${
+                        formData.propertyType === type 
+                          ? 'bg-[#B58A3A] border-[#B58A3A] text-[#F8F5EE] shadow-[0_0_15px_rgba(181,138,58,0.4)]' 
+                          : 'bg-[#F8F5EE]/5 border-[#B58A3A]/30 text-[#E9DFCE]/70 hover:border-[#B58A3A]/70 hover:text-[#F8F5EE]'
+                      }`}
+                    >
                       {type}
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-1">
-                <label className="flex items-start gap-2 cursor-pointer group">
-                  <div className="relative flex items-center justify-center mt-0.5">
-                    <input type="checkbox" name="agreed" checked={formData.agreed} onChange={handleInputChange} required className="peer appearance-none w-4 h-4 rounded-[3px] border border-white/30 bg-white/5 checked:bg-secondary checked:border-secondary transition-all cursor-pointer" />
-                    <svg className="absolute w-2.5 h-2.5 pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity text-(--color-primary)" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+              {/* Checkbox (Terms) */}
+              <div className="pt-2">
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <div className="relative flex items-center justify-center mt-0.5 shrink-0">
+                    <input 
+                      type="checkbox" 
+                      name="agreed" 
+                      checked={formData.agreed} 
+                      onChange={handleInputChange} 
+                      required 
+                      className="peer appearance-none w-4 h-4 rounded-[4px] border border-[#B58A3A]/50 bg-[#F8F5EE]/5 checked:bg-[#B58A3A] checked:border-[#B58A3A] transition-all cursor-pointer" 
+                    />
+                    <svg className="absolute w-2.5 h-2.5 pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity text-[#39342D]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-white/60 text-[10px] sm:text-xs leading-tight select-none group-hover:text-white/80 transition-colors">
-                    I agree to the <a href="#terms" className="text-secondary hover:underline font-semibold">Terms & Conditions</a> and consent to being contacted.
+                  <span className="text-[#E9DFCE]/70 text-[10px] sm:text-xs font-light leading-relaxed select-none group-hover:text-[#F8F5EE] transition-colors">
+                    I agree to the <a href="#terms" className="text-[#B58A3A] hover:underline font-semibold">Terms & Conditions</a> and consent to being contacted.
                   </span>
                 </label>
               </div>
 
-              <div className="pt-2">
-                <button type="submit" disabled={isSubmitting} className="w-full bg-secondary border border-secondary py-2.5 text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-(--color-primary) hover:bg-transparent hover:text-secondary transition-all duration-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-[0_0_15px_rgba(220,200,163,0.2)] active:scale-[0.98]">
+              {/* Submit Button */}
+              <div className="pt-4">
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting} 
+                  className="w-full bg-[#B58A3A] border border-[#B58A3A] py-3.5 text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-[#F8F5EE] hover:bg-[#F8F5EE] hover:text-[#39342D] hover:border-[#F8F5EE] transition-all duration-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_10px_30px_rgba(181,138,58,0.3)] active:scale-[0.98]"
+                >
                   {isSubmitting ? 'Processing...' : 'Request Consultation'}
                 </button>
               </div>
+
             </form>
           </motion.div>
         </motion.div>

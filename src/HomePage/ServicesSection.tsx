@@ -15,7 +15,7 @@ const services = [
     description: 'End-to-end interior design for luxury villas and bespoke apartments. We create deeply personal spaces that balance elegant aesthetics with daily functionality.',
     features: ['Space Planning', 'Custom Millwork', 'Material Selection', 'Turnkey Installation'],
     image: '/residential-design.webp',
-    accentColor: 'from-[#B58A3A]/20'
+    accentColor: 'from-primary/20'
   },
   {
     id: '02',
@@ -23,7 +23,7 @@ const services = [
     description: 'Elevating brand identities through immersive spatial design. From boutique hotels to high-end executive offices, we design spaces that captivate and convert.',
     features: ['Brand Translation', 'Flow Optimization', 'Acoustic Design', 'Commercial Lighting'],
     image: '/commercial-design.webp',
-    accentColor: 'from-[#B58A3A]/15'
+    accentColor: 'from-primary/15'
   },
   {
     id: '03',
@@ -31,7 +31,7 @@ const services = [
     description: 'Breathing new life into existing structures. We handle structural remodeling, layout reconfiguration, and complete exterior-to-interior modernization.',
     features: ['Structural Drafting', 'Permit Management', 'Contractor Oversight', '3D Visualization'],
     image: '/architecture-rennovation.jpg',
-    accentColor: 'from-[#8F711C]/20'
+    accentColor: 'from-primary/20'
   },
   {
     id: '04',
@@ -39,7 +39,7 @@ const services = [
     description: 'The final layer of soul. We curate rare artifacts, source global art pieces, and design custom furniture tailored to the exact dimensions of your space.',
     features: ['Art Curation', 'Textile Sourcing', 'Custom Upholstery', 'Final Decor Styling'],
     image: '/furniture.webp',
-    accentColor: 'from-[#B58A3A]/20'
+    accentColor: 'from-primary/20'
   }
 ];
 
@@ -100,25 +100,25 @@ const ServicesSection: React.FC = () => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative w-full bg-[#F8F5EE] py-20 md:py-32 font-body overflow-hidden selection:bg-[#B58A3A] selection:text-white">
+    <div ref={containerRef} className="relative w-full bg-surface py-20 md:py-24 font-body overflow-hidden selection:bg-primary selection:text-white">
 
       {/* Background Ambient Glow */}
-      <div className="absolute top-0 right-0 w-full max-w-4xl h-96 bg-[#B58A3A]/10 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-0 right-0 w-full max-w-4xl h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-[85rem] mx-auto w-full px-4 sm:px-6 lg:px-12">
 
         {/* --- HEADER --- */}
         <div className="flex flex-col items-center text-center mb-16 md:mb-24 section-header">
           <div className="flex items-center gap-4 mb-6">
-            <span className="w-8 md:w-12 h-px bg-[#B58A3A]" />
-            <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[#B58A3A]">
+            <span className="w-8 md:w-12 h-px bg-gold" />
+            <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-gold">
               Our Expertise
             </span>
-            <span className="w-8 md:w-12 h-px bg-[#B58A3A]" />
+            <span className="w-8 md:w-12 h-px bg-gold" />
           </div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-[#39342D] leading-[1.05] tracking-tight max-w-4xl">
-            Signature <span className="text-[#B58A3A] italic font-light">Services</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-text-primary leading-[1.05] tracking-tight max-w-4xl">
+            Signature <span className="text-primary italic font-light">Services</span>
           </h2>
         </div>
 
@@ -134,13 +134,13 @@ const ServicesSection: React.FC = () => {
               >
 
                 {/* --- 1. CINEMATIC IMAGE HALF --- */}
-                <div className="img-wrapper relative w-full lg:w-[60%] h-[320px] sm:h-[400px] lg:h-[500px] rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(57,52,45,0.08)] border border-[#B58A3A]/20 z-10 shrink-0">
+                <div className="img-wrapper relative w-full lg:w-[60%] h-[320px] sm:h-[400px] lg:h-[500px] rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(12,10,13,0.08)] border border-primary/20 z-10 shrink-0">
                   <img
                     src={service.image}
                     alt={service.title}
                     className="img-inner w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-[filter] duration-1000"
                   />
-                  <div className="absolute inset-0 bg-[#39342D]/10 group-hover:bg-transparent transition-colors duration-1000 pointer-events-none" />
+                  <div className="absolute inset-0 bg-secondary/10 group-hover:bg-transparent transition-colors duration-1000 pointer-events-none" />
                 </div>
 
                 {/* --- 2. FLOATING GLASS CARD HALF --- */}
@@ -149,31 +149,31 @@ const ServicesSection: React.FC = () => {
                   ${isEven ? 'lg:-ml-24' : 'lg:-mr-24'}
                 `}>
 
-                  <div className="relative bg-white/80 backdrop-blur-2xl border border-[#B58A3A]/25 rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_rgba(57,52,45,0.08)] overflow-hidden transition-all duration-700 hover:bg-white hover:border-[#B58A3A]/50">
+                  <div className="relative bg-white/80 backdrop-blur-2xl border border-primary/25 rounded-[1.5rem] md:rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_rgba(12,10,13,0.08)] overflow-hidden transition-all duration-700 hover:bg-white hover:border-primary/50">
 
                     <div className={`absolute top-0 right-0 w-full h-full bg-gradient-to-bl ${service.accentColor} to-transparent opacity-40 pointer-events-none -z-10`} />
 
                     <div className="flex items-center gap-4 mb-6 md:mb-8">
-                      <span className="text-3xl md:text-4xl font-karlen font-bold text-[#39342D]/20 group-hover:text-[#B58A3A] transition-colors duration-700">
+                      <span className="text-3xl md:text-4xl font-karlen font-bold text-text-primary/20 group-hover:text-gold transition-colors duration-700">
                         {service.id}
                       </span>
-                      <div className="h-px flex-grow bg-[#B58A3A]/20" />
+                      <div className="h-px flex-grow bg-primary/20" />
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-karlen text-[#39342D] mb-4 sm:mb-6 group-hover:text-[#B58A3A] transition-colors duration-700">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-karlen text-text-primary mb-4 sm:mb-6 group-hover:text-primary transition-colors duration-700">
                       {service.title}
                     </h3>
 
-                    <p className="text-sm md:text-base text-[#8A8175] font-light leading-relaxed mb-8 md:mb-10">
+                    <p className="text-sm md:text-base text-text-secondary font-light leading-relaxed mb-8 md:mb-10">
                       {service.description}
                     </p>
 
                     <button
                       onClick={openModal}
-                      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#B58A3A] bg-[#B58A3A] px-7 py-3.5 w-full sm:w-auto font-body text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-500 ease-out hover:bg-white hover:text-[#39342D] hover:border-[#39342D] hover:shadow-[0_0_30px_rgba(181,138,58,0.3)] active:scale-95 cursor-pointer"
+                      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-primary bg-primary px-7 py-3.5 w-full sm:w-auto font-body text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-text-light transition-all duration-500 ease-out hover:bg-secondary hover:text-gold hover:border-gold hover:shadow-[0_0_30px_rgba(48,37,28,0.3)] active:scale-95 cursor-pointer"
                     >
                       <span className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
-                      <div className="relative flex flex-col items-center justify-center overflow-hidden border-[#B58A3A] h-[1.2em] w-full min-w-[150px]">
+                      <div className="relative flex flex-col items-center justify-center overflow-hidden h-[1.2em] w-full min-w-[150px]">
                         <span className="transition-all duration-500 group-hover:-translate-y-full leading-none"> Book CONSULTATION</span>
                         <span className="absolute translate-y-full transition-all duration-500 group-hover:translate-y-0 font-bold leading-none">GET STARTED</span>
                       </div>

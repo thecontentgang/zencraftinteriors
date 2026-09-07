@@ -40,18 +40,25 @@ h6 {
 }
 
 @theme {
-  --color-primary: #1B1B1D;
-  --color-secondary: #D4AF37;
-  --color-accent: #A68A64;
+  --color-primary: #30251C;
+  --color-secondary: #2B241E;
+  --color-dark: #0C0A0D;
 
-  --color-background: #F7F5F2;
+  --color-light: #F7F4EF;
+  --color-light-alt: #F2EDE6;
+  --color-light-muted: #EDE7DE;
+
+  --color-background: #F7F4EF;
   --color-surface: #FFFFFF;
 
-  --color-text-primary: #1B1B1D;
-  --color-text-secondary: #6B6B6B;
+  --color-text-primary: #0C0A0D;
+  --color-text-secondary: #2B241E;
+  --color-text-light: #F7F4EF;
 
-  --color-sand: #DCC8A3;
-  --color-coffee: #4A3A2F;
+  --color-gold: #B58A3A;
+  --color-gold-bright: #D4AF37;
+
+  --color-accent: #30251C;
 }
 
 /* HeroSection Css */

@@ -82,7 +82,7 @@ const DesignsPage: React.FC = () => {
   };
 
   return (
-    <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-x-hidden selection:bg-sand selection:text-primary z-10 pt-32 pb-40">
+    <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-x-hidden selection:bg-gold selection:text-primary z-10 pt-32 pb-40">
       
       {/* --- PREMIUM TEXT MASKING & REVEAL CSS --- */}
       <style>{`
@@ -146,7 +146,7 @@ const DesignsPage: React.FC = () => {
                 <span className="slide-up-text block">Our</span>
               </div>
               <div className="clip-mask">
-                <span className="slide-up-text text-sand italic font-light block">Designs.</span>
+                <span className="slide-up-text text-gold italic font-light block">Designs.</span>
               </div>
             </h1>
           </div>
@@ -188,7 +188,7 @@ const DesignsPage: React.FC = () => {
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 border-t border-white/10 pt-6">
                   <div>
                     <div className="clip-mask mb-1">
-                      <h2 className="slide-up-text text-3xl md:text-5xl font-karlen text-white group-hover:text-sand transition-colors duration-500" style={{ transitionDelay: '0.1s' }}>
+                      <h2 className="slide-up-text text-3xl md:text-5xl font-karlen text-white group-hover:text-gold transition-colors duration-500" style={{ transitionDelay: '0.1s' }}>
                         {project.title}
                       </h2>
                     </div>
@@ -201,7 +201,7 @@ const DesignsPage: React.FC = () => {
 
                   <div className="flex items-center gap-6 md:text-right pt-2 md:pt-0">
                     <div className="clip-mask">
-                      <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-secondary" style={{ transitionDelay: '0.1s' }}>
+                      <span className="slide-up-text block text-[10px] font-bold tracking-[0.2em] uppercase text-gold" style={{ transitionDelay: '0.1s' }}>
                         {project.type}
                       </span>
                     </div>
@@ -223,15 +223,15 @@ const DesignsPage: React.FC = () => {
       <div className="reveal-group mt-40 pt-20 border-t border-white/10 flex flex-col items-center text-center px-6">
         <h3 className="clip-mask text-3xl md:text-5xl font-karlen text-white mb-8">
           <span className="slide-up-text block" style={{ transitionDelay: '0s' }}>
-            Ready to begin <span className="text-sand italic">your</span> narrative?
+            Ready to begin <span className="text-gold italic">your</span> narrative?
           </span>
         </h3>
         
         <div className="slide-up-fade" style={{ transitionDelay: '0.2s' }}>
-          <button className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-secondary transition-colors duration-500 ease-buttery">
-            <span className="w-12 h-px bg-white/20 group-hover:bg-secondary transition-colors" />
+          <button className="group flex items-center gap-4 text-xs font-bold tracking-widest uppercase text-white hover:text-gold transition-colors duration-500 ease-buttery">
+            <span className="w-12 h-px bg-white/20 group-hover:bg-gold transition-colors" />
             Start a Conversation
-            <span className="w-12 h-px bg-white/20 group-hover:bg-secondary transition-colors" />
+            <span className="w-12 h-px bg-white/20 group-hover:bg-gold transition-colors" />
           </button>
         </div>
       </div>

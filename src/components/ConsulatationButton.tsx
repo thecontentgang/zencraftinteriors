@@ -15,7 +15,7 @@ const ConsultationButton: React.FC<ConsultationButtonProps> = ({
   text = 'Book a Free Call',
   topText = 'Expert Advice',
   bottomText = "Let's Talk",
-  color = '#C8A97E',
+  color = '#30251C',
   onClick,
   className = '',
 }) => {

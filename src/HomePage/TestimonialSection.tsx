@@ -149,22 +149,22 @@ const HorizontalVideoTestimonials: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#F8F5EE] text-[#39342D] py-20 md:py-32 overflow-hidden font-sans border-t border-[#B58A3A]/10">
+    <section ref={sectionRef} className="relative w-full bg-light text-text-primary py-20 md:py-32 overflow-hidden font-sans border-t border-primary/10">
       
       {/* Soft Gold Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(181,138,58,0.08)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(48,37,28,0.08)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
 
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* --- HEADER --- */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div className="max-w-2xl">
-            <span className="testi-header-el inline-flex items-center gap-2 px-3.5 py-1 mb-6 rounded-full text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase text-[#B58A3A] bg-[#B58A3A]/10 border border-[#B58A3A]/20 backdrop-blur-md">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B58A3A] animate-pulse" />
+            <span className="testi-header-el inline-flex items-center gap-2 px-3.5 py-1 mb-6 rounded-full text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase text-gold bg-gold/10 border border-gold/20 backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
               Client Perspectives
             </span>
-            <h2 className="testi-header-el text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] text-[#39342D]">
-              The living <span className="text-[#B58A3A] italic font-light">proof.</span>
+            <h2 className="testi-header-el text-4xl sm:text-5xl md:text-6xl font-karlen tracking-tight leading-[1.05] text-text-primary">
+              The living <span className="text-primary italic font-light">proof.</span>
             </h2>
           </div>
           
@@ -172,16 +172,16 @@ const HorizontalVideoTestimonials: React.FC = () => {
           <div className="testi-header-el flex items-center gap-4">
             <button 
               onClick={() => setIsMuted(!isMuted)}
-              className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-[#8A8175] hover:text-[#39342D] transition-colors"
+              className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] text-text-secondary hover:text-text-primary transition-colors"
             >
               {isMuted ? 'Unmute Videos' : 'Mute Videos'}
             </button>
-            <div className="h-6 w-px bg-[#B58A3A]/30 mx-2 hidden md:block" />
+            <div className="h-6 w-px bg-primary/30 mx-2 hidden md:block" />
             <div className="flex gap-2">
-              <button onClick={scrollLeft} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#B58A3A]/30 flex items-center justify-center text-[#39342D] hover:bg-[#B58A3A] hover:text-white hover:border-[#B58A3A] transition-colors shadow-sm">
+              <button onClick={scrollLeft} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-primary/30 flex items-center justify-center text-text-primary hover:bg-secondary hover:text-gold hover:border-gold transition-colors shadow-sm">
                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
               </button>
-              <button onClick={scrollRight} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#B58A3A]/30 flex items-center justify-center text-[#39342D] hover:bg-[#B58A3A] hover:text-white hover:border-[#B58A3A] transition-colors shadow-sm">
+              <button onClick={scrollRight} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-primary/30 flex items-center justify-center text-text-primary hover:bg-secondary hover:text-gold hover:border-gold transition-colors shadow-sm">
                 <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>
@@ -204,7 +204,7 @@ const HorizontalVideoTestimonials: React.FC = () => {
             return (
               <div 
                 key={t.id} 
-                className="testi-card relative w-[65vw] sm:w-[260px] md:w-[280px] aspect-[9/16] shrink-0 snap-center md:snap-start bg-[#39342D] border border-[#B58A3A]/20 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group shadow-[0_15px_40px_rgba(57,52,45,0.1)] hover:border-[#B58A3A]/50 transition-all duration-500"
+                className="testi-card relative w-[65vw] sm:w-[260px] md:w-[280px] aspect-[9/16] shrink-0 snap-center md:snap-start bg-secondary border border-primary/20 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group shadow-[0_15px_40px_rgba(12,10,13,0.1)] hover:border-primary/50 transition-all duration-500"
                 onClick={(e) => handleCardClick(index, e)}
               >
                 
@@ -219,12 +219,12 @@ const HorizontalVideoTestimonials: React.FC = () => {
                 />
                   
                 {/* 2. Instagram-Style Gradient Overlays */}
-                <div className={`absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#39342D]/60 to-transparent transition-opacity duration-300 pointer-events-none ${isPlaying ? 'opacity-0' : 'opacity-100'}`} />
-                <div className="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-[#39342D]/95 via-[#39342D]/40 to-transparent pointer-events-none" />
+                <div className={`absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-secondary/60 to-transparent transition-opacity duration-300 pointer-events-none ${isPlaying ? 'opacity-0' : 'opacity-100'}`} />
+                <div className="absolute bottom-0 inset-x-0 h-2/3 bg-gradient-to-t from-secondary/95 via-secondary/40 to-transparent pointer-events-none" />
 
                 {/* Play/Pause UI Button (Centered) */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 ${isPlaying ? 'bg-black/40 opacity-0 scale-90' : 'bg-white/90 shadow-lg group-hover:bg-[#B58A3A] group-hover:text-white opacity-100 scale-100 text-[#39342D]'}`}>
+                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 ${isPlaying ? 'bg-black/40 opacity-0 scale-90' : 'bg-white/90 shadow-lg group-hover:bg-primary group-hover:text-white opacity-100 scale-100 text-text-primary'}`}>
                     <svg className="w-5 h-5 ml-1 transition-colors" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />
                     </svg>
@@ -234,9 +234,9 @@ const HorizontalVideoTestimonials: React.FC = () => {
                 {/* Playing Indicator */}
                 {isPlaying && (
                   <div className="absolute top-5 right-5 flex gap-1 items-end h-3">
-                    <span className="w-1 h-1.5 bg-[#B58A3A] animate-[bounce_1s_infinite]" />
-                    <span className="w-1 h-2.5 bg-[#B58A3A] animate-[bounce_1.2s_infinite]" />
-                    <span className="w-1 h-3.5 bg-[#B58A3A] animate-[bounce_0.8s_infinite]" />
+                    <span className="w-1 h-1.5 bg-gold animate-[bounce_1s_infinite]" />
+                    <span className="w-1 h-2.5 bg-gold animate-[bounce_1.2s_infinite]" />
+                    <span className="w-1 h-3.5 bg-gold animate-[bounce_0.8s_infinite]" />
                   </div>
                 )}
 
@@ -246,14 +246,14 @@ const HorizontalVideoTestimonials: React.FC = () => {
                  
                   
                   <div className="flex items-center gap-2.5 border-t border-white/20 pt-3">
-                    <div className="w-7 h-7 rounded-full bg-[#B58A3A] flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white shadow-md">
+                    <div className="w-7 h-7 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white shadow-md">
                       {t.name.charAt(0)}
                     </div>
                     <div>
                       <h4 className="text-xs font-bold tracking-wide text-white drop-shadow-md">
                         {t.name}
                       </h4>
-                      <p className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest text-[#E9DFCE]/80 mt-0.5 drop-shadow-md">
+                      <p className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest text-light-muted/80 mt-0.5 drop-shadow-md">
                         {t.role}
                       </p>
                     </div>

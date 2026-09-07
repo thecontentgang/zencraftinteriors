@@ -26,10 +26,10 @@ const projectDetailsData = {
       '/sumith-AZ/sumith-img-16.webp',
       '/sumith-AZ/sumith-img-17.webp'
     ],
-     nextProjectSlug: 'prudhvi-bollineni-bion',
+    nextProjectSlug: 'prudhvi-bollineni-bion',
     nextProjectName: 'Bollineni Bion'
   },
- 
+
   'prudhvi-bollineni-bion': {
     title: 'Prudhvi Bollineni Bion',
     heroImage: '/prudhvi-bion/prudhvi-img-1.webp',
@@ -137,14 +137,14 @@ const ProjectDetail: React.FC = () => {
   // 1. Initial Render & Scroll Reveal Observer
   useEffect(() => {
     if (!project) return;
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-revealed');
-            observer.unobserve(entry.target); 
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -175,15 +175,15 @@ const ProjectDetail: React.FC = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen || !project) return;
-      
+
       if (e.key === 'Escape') {
         setLightboxOpen(false);
       }
-      
+
       if (e.key === 'ArrowRight') {
         setCurrentIndex((prev) => (prev === project.gallery.length - 1 ? 0 : prev + 1));
       }
-      
+
       if (e.key === 'ArrowLeft') {
         setCurrentIndex((prev) => (prev === 0 ? project.gallery.length - 1 : prev - 1));
       }
@@ -222,9 +222,20 @@ const ProjectDetail: React.FC = () => {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-[var(--color-primary)] font-body text-white overflow-x-hidden selection:bg-[var(--color-secondary)] selection:text-[var(--color-primary)] z-10">
-      
+    // Added 'no-scrollbar' class here
+    <main className="relative min-h-screen w-full bg-background font-body text-text-primary overflow-x-hidden selection:bg-primary selection:text-white z-10 no-scrollbar">
+
       <style>{`
+        /* --- SCROLLBAR HIDING --- */
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* --- REVEAL ANIMATIONS --- */
         .reveal-on-scroll { opacity: 0; transform: translateY(60px); transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-on-scroll.is-revealed { opacity: 1; transform: translateY(0); }
         @keyframes image-scale { 0% { transform: scale(1.1); } 100% { transform: scale(1); } }
@@ -242,38 +253,41 @@ const ProjectDetail: React.FC = () => {
 
       {/* --- HERO IMAGE --- */}
       <section className="relative w-full h-[85vh] lg:h-screen overflow-hidden">
-        <img 
-          src={project.heroImage} 
-          alt={project.title} 
+        <img
+          src={project.heroImage}
+          alt={project.title}
           className="w-full h-full object-cover animate-hero-scale"
+          fetchPriority="high" /* Forces immediate loading of the critical first image */
+          decoding="async"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)] via-[var(--color-primary)]/10 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-light via-light/10 to-transparent pointer-events-none" />
 
         <div className="absolute bottom-0 left-0 w-full px-4 sm:px-6 lg:px-12 pb-16 md:pb-24 z-10">
           <div className="max-w-[90rem] mx-auto reveal-on-scroll" style={{ transitionDelay: '0.2s' }}>
-            <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[8rem] font-karlen text-white leading-[0.95] tracking-tight mb-2 drop-shadow-lg">
-              {project.title.split(' ')[0]} <br className="hidden md:block" />
-              <span className="text-[var(--color-secondary)] italic font-light">{project.title.split(' ').slice(1).join(' ')}</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-text-primary leading-tight tracking-tight mb-2 drop-shadow-md">
+              {project.title}
             </h1>
           </div>
         </div>
       </section>
 
       {/* --- DYNAMIC 2x2 GRID GALLERY --- */}
-      <section className="relative w-full px-4 sm:px-6 lg:px-12 py-16 md:py-32 bg-[var(--color-primary)]">
+      <section className="relative w-full px-4 sm:px-6 lg:px-12 py-16 md:py-32 bg-surface">
         <div className="max-w-[90rem] mx-auto">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             {project.gallery.map((imgSrc, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 onClick={() => openLightbox(index)}
                 className="group relative w-full rounded-2xl md:rounded-3xl overflow-hidden aspect-[4/3] reveal-on-scroll cursor-pointer"
               >
-                <img 
-                  src={imgSrc} 
-                  alt={`${project.title} Detail ${index + 1}`} 
-                  className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000 ease-buttery" 
+                <img
+                  src={imgSrc}
+                  alt={`${project.title} Detail ${index + 1}`}
+                  className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-1000 ease-buttery"
+                  loading="lazy" /* Browser will only fetch this image when scrolled near it */
+                  decoding="async" /* Prevents the main thread from blocking while decoding */
                 />
                 {/* Hover overlay with a view icon */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center pointer-events-none">
@@ -291,27 +305,50 @@ const ProjectDetail: React.FC = () => {
         </div>
       </section>
 
-      {/* --- NEXT PROJECT CTA --- */}
-      <section className="relative w-full py-24 md:py-32 px-4 text-center bg-[var(--color-primary)] flex flex-col items-center border-t border-white/5 reveal-on-scroll">
-        <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-white/40 mb-6">
+      <section className="relative w-full py-24 md:py-32 px-4 text-center bg-[#F8F5EE] flex flex-col items-center border-t border-[#B58A3A]/20 reveal-on-scroll">
+        <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[#B58A3A] mb-6">
           Next Project
         </span>
-        
-        <Link to={`/projects/${project.nextProjectSlug}`} className="group">
-          <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-karlen text-white/50 group-hover:text-white transition-colors duration-700 ease-buttery leading-none">
-            {project.nextProjectName.split(' ')[0]} <span className="text-white/30 group-hover:text-[var(--color-secondary)] italic font-light transition-colors duration-700 ease-buttery">{project.nextProjectName.split(' ').slice(1).join(' ')}</span>
+
+        {/* The 'group' class here controls the hover state for everything inside */}
+        <Link to={`/projects/${project.nextProjectSlug}`} className="group flex flex-col items-center">
+
+          {/* Full text changes to gold smoothly on hover */}
+          <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-karlen text-[#39342D] group-hover:text-[#B58A3A] transition-colors duration-500 ease-out leading-none">
+            {project.nextProjectName.split(' ')[0]}{' '}
+            <span className="italic font-light">
+              {project.nextProjectName.split(' ').slice(1).join(' ')}
+            </span>
           </h2>
+
+          {/* Hint that slides up and fades in when the user hovers */}
+          <div className="overflow-hidden mt-6 h-6 flex items-center justify-center">
+            <p className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[#B58A3A] opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out flex items-center gap-2">
+              Click to explore
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-500"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </p>
+          </div>
+
         </Link>
       </section>
 
       {/* --- LIGHTBOX MODAL --- */}
       {lightboxOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md animate-fade-in"
           onClick={closeLightbox}
         >
           {/* Close Button */}
-          <button 
+          <button
             onClick={closeLightbox}
             className="absolute top-6 right-6 md:top-8 md:right-8 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
           >
@@ -319,7 +356,7 @@ const ProjectDetail: React.FC = () => {
           </button>
 
           {/* Left Navigation Arrow */}
-          <button 
+          <button
             onClick={handlePrevClick}
             className="absolute left-4 md:left-8 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
           >
@@ -327,7 +364,7 @@ const ProjectDetail: React.FC = () => {
           </button>
 
           {/* Right Navigation Arrow */}
-          <button 
+          <button
             onClick={handleNextClick}
             className="absolute right-4 md:right-8 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
           >
@@ -336,15 +373,15 @@ const ProjectDetail: React.FC = () => {
 
           {/* Active Image */}
           <div className="relative w-full max-w-[90vw] h-full max-h-[85vh] flex items-center justify-center px-12 animate-scale-up">
-            <img 
-              key={currentIndex} 
-              src={project.gallery[currentIndex]} 
-              alt={`${project.title} Lightbox View`} 
+            <img
+              key={currentIndex}
+              src={project.gallery[currentIndex]}
+              alt={`${project.title} Lightbox View`}
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-              onClick={(e) => e.stopPropagation()} 
+              onClick={(e) => e.stopPropagation()}
             />
           </div>
-          
+
           {/* Counter at the bottom */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm font-mono tracking-widest">
             {currentIndex + 1} / {project.gallery.length}

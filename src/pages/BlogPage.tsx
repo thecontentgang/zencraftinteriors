@@ -77,7 +77,7 @@ const BlogsPage: React.FC = () => {
   }, []);
 
   return (
-    <main className="relative min-h-screen w-full bg-primary font-body text-surface overflow-x-hidden selection:bg-sand selection:text-primary z-10 pt-24 pb-32">
+    <main className="relative min-h-screen w-full bg-light-alt font-body text-text-primary overflow-x-hidden selection:bg-primary selection:text-white z-10 pt-24 pb-32">
       
       {/* --- BUTTERY SCROLL ANIMATION CSS --- */}
       <style>{`
@@ -133,24 +133,24 @@ const BlogsPage: React.FC = () => {
       `}</style>
 
       {/* --- AMBIENT GLOW --- */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-secondary/10 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-gold/10 blur-[120px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-[90rem] mx-auto w-full px-4 sm:px-6 lg:px-12">
         
         {/* --- HEADER --- */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 hero-reveal">
           <div>
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-karlen text-white leading-[0.9] tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-karlen text-text-primary leading-[0.9] tracking-tight">
               <div className="clip-mask">
                 <span className="slide-up-text block">The</span>
               </div>
               <div className="clip-mask">
-                <span className="slide-up-text text-sand italic font-light block">Journal.</span>
+                <span className="slide-up-text text-text-secondary italic font-light block">Journal.</span>
               </div>
             </h1>
           </div>
           <div className="clip-mask mb-2">
-            <p className="slide-up-text text-sm text-white/50 max-w-xs font-light leading-relaxed" style={{ transitionDelay: '0.2s' }}>
+            <p className="slide-up-text text-sm text-text-secondary max-w-xs font-light leading-relaxed" style={{ transitionDelay: '0.2s' }}>
               Exploring the intersection of materiality, light, and modern architectural philosophy.
             </p>
           </div>
@@ -168,21 +168,21 @@ const BlogsPage: React.FC = () => {
               alt={featuredPost.title}
               className="image-inner w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-buttery"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
           </div>
 
           {/* Content Overlay Panel */}
           <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 flex flex-col justify-end z-10">
             <div className="slide-up-fade flex items-center gap-4 mb-4 md:mb-6" style={{ transitionDelay: '0.1s' }}>
-              <span className="bg-secondary text-primary text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">
+              <span className="bg-gold text-dark text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">
                 {featuredPost.category}
               </span>
-              <span className="text-xs font-light text-white/70">
+              <span className="text-xs font-light text-text-light/80">
                 {featuredPost.date}
               </span>
             </div>
             <div className="clip-mask">
-              <h2 className="slide-up-text text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-white leading-[1.1] max-w-4xl group-hover:text-sand transition-colors duration-500" style={{ transitionDelay: '0.2s' }}>
+              <h2 className="slide-up-text text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-karlen text-text-light leading-[1.1] max-w-4xl group-hover:text-gold transition-colors duration-500" style={{ transitionDelay: '0.2s' }}>
                 {featuredPost.title}
               </h2>
             </div>
@@ -210,7 +210,7 @@ const BlogsPage: React.FC = () => {
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                   
                   <div className="absolute top-4 left-4 z-10 slide-up-fade" style={{ transitionDelay: '0.2s' }}>
-                    <span className="bg-primary/80 backdrop-blur-md text-white text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-white/10">
+                    <span className="bg-surface/80 backdrop-blur-md text-text-primary text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-gold/20">
                       {post.category}
                     </span>
                   </div>
@@ -218,18 +218,18 @@ const BlogsPage: React.FC = () => {
 
                 <div className="flex flex-col flex-grow pr-4">
                   <div className="clip-mask mb-3">
-                    <span className="slide-up-text block text-xs font-light text-white/40" style={{ transitionDelay: '0.1s' }}>
+                    <span className="slide-up-text block text-xs font-light text-text-secondary" style={{ transitionDelay: '0.1s' }}>
                       {post.date}
                     </span>
                   </div>
                   <div className="clip-mask mb-4">
-                    <h3 className="slide-up-text text-2xl md:text-3xl font-karlen text-white/90 group-hover:text-white leading-tight transition-colors duration-500" style={{ transitionDelay: '0.2s' }}>
+                    <h3 className="slide-up-text text-2xl md:text-3xl font-karlen text-text-primary/90 group-hover:text-gold leading-tight transition-colors duration-500" style={{ transitionDelay: '0.2s' }}>
                       {post.title}
                     </h3>
                   </div>
                   
-                  <div className="mt-auto pt-2 flex items-center gap-3 text-secondary text-[10px] font-bold tracking-[0.2em] uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-buttery slide-up-fade" style={{ transitionDelay: '0.3s' }}>
-                    <span className="w-6 h-px bg-secondary" />
+                  <div className="mt-auto pt-2 flex items-center gap-3 text-gold text-[10px] font-bold tracking-[0.2em] uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-buttery slide-up-fade" style={{ transitionDelay: '0.3s' }}>
+                    <span className="w-6 h-px bg-gold" />
                     Read Article
                   </div>
                 </div>
@@ -240,7 +240,7 @@ const BlogsPage: React.FC = () => {
 
         {/* --- LOAD MORE ENTRY PORTAL --- */}
         <div className="reveal-group mt-24 flex justify-center">
-          <button className="slide-up-fade group flex items-center gap-6 text-[10px] md:text-xs font-bold tracking-widest uppercase text-white hover:text-secondary transition-colors duration-500 ease-buttery px-8 py-4 rounded-full border border-white/20 hover:border-secondary/50" style={{ transitionDelay: '0s' }}>
+          <button className="slide-up-fade group flex items-center gap-6 text-[10px] md:text-xs font-bold tracking-widest uppercase text-text-primary hover:text-dark hover:bg-gold transition-all duration-500 ease-buttery px-8 py-4 rounded-full border border-gold/40 hover:border-gold" style={{ transitionDelay: '0s' }}>
             Load More Entries
           </button>
         </div>

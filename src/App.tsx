@@ -6,7 +6,7 @@ import Home from './HomePage/HomePage';
 import About from './AboutPage/AboutPage'; // Fixed potential typo here
 import ServicesPage from './pages/ServicesPage';
 import ContactPage from './pages/ContactPage';
-import ServiceDetail from './pages/ServiceDetail';
+// import ServiceDetail from './pages/ServiceDetail';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetail from './pages/ProjectDetails';
 import BlogsPage from './pages/BlogPage';
@@ -31,7 +31,7 @@ const App = () => {
             <Route path="about" element={<About />} />
 
             <Route path="services" element={<ServicesPage />} />
-            <Route path="services/:id" element={<ServiceDetail />} />
+            {/* <Route path="services/:id" element={<ServiceDetail />} /> */}
 
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="projects/:id" element={<ProjectDetail />} />
