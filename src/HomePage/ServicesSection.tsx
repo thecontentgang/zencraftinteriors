@@ -139,6 +139,7 @@ const ServicesSection: React.FC = () => {
                     src={service.image}
                     alt={service.title}
                     className="img-inner w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-[filter] duration-1000"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-secondary/10 group-hover:bg-transparent transition-colors duration-1000 pointer-events-none" />
                 </div>

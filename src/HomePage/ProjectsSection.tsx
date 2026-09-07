@@ -226,6 +226,7 @@ const ProjectsSection: React.FC = () => {
                   src={proj.rightImage}
                   alt={proj.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 via-transparent to-transparent opacity-60" />
 
@@ -234,6 +235,7 @@ const ProjectsSection: React.FC = () => {
                     src={proj.leftImage}
                     alt={`${proj.name} detail`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>

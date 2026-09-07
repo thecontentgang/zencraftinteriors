@@ -79,6 +79,7 @@ const AboutSection: React.FC = () => {
               src="/praveen-VRE/praveen-img-9.webp" 
               alt="Zencraft Interior Detail" 
               className="absolute inset-0 w-full h-full object-cover grayscale-[10%]"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">

@@ -16,6 +16,8 @@ export default function HeroSection() {
           src="/herosection-bg.png"
           alt="Zencraft Interior Architecture"
           className="w-full h-full object-cover grayscale-[5%]"
+          fetchPriority="high"
+          loading="eager"
         />
         
         {/* Overlays using background for a bright, airy, luxurious bleed */}
