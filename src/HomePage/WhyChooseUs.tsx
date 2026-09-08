@@ -31,13 +31,13 @@ const timelineSteps = [
     id: 'step-4',
     num: '04',
     title: 'Site Execution',
-    img: '/site-execution.webp'
+    img: '/site-execution.png'
   },
   {
     id: 'step-5',
     num: '05',
     title: 'Handover',
-    img: '/handover.webp'
+    img: '/handover.png'
   }
 ];
 
