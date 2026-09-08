@@ -14,13 +14,13 @@ const ProjectsPage: React.FC = () => {
       id: '01',
       title: 'Sumith',
       category: 'Residential',
-      image: '/sumith-AZ/sumith-img-1.webp',
+      image: '/sumith-AZ/sumith-img-11.webp',
     },
     {
       id: '03',
       title: 'Prudhvi - Bollineni Bion',
       category: 'Residential',
-      image: '/prudhvi-bion/prudhvi-img-1.webp',
+      image: '/prudhvi-bion/prudhvi-img-11.webp',
     },
     {
       id: '04',

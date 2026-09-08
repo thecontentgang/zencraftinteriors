@@ -186,7 +186,7 @@ const AboutPage: React.FC = () => {
 
             <div className="gsap-fade-up space-y-6 text-sm md:text-base text-[#8A8175] leading-relaxed font-light mb-10 max-w-xl">
               <p>
-                At Zencraft, we believe that true luxury is not defined by excess, but by intention. Every texture we select, every light we place, and every layout we draft is rooted in a deep understanding of how you live and interact with your environment.
+                At The Zencraft, we believe that true luxury is not defined by excess, but by intention. Every texture we select, every light we place, and every layout we draft is rooted in a deep understanding of how you live and interact with your environment.
               </p>
               <p>
                 Our approach marries timeless architectural principles with modern sensibilities. We don't just decorate rooms; we sculpt sanctuaries that reflect your personal narrative, creating a seamless harmony between aesthetics and functionality.
@@ -281,7 +281,7 @@ const AboutPage: React.FC = () => {
           <div className="md:col-span-5 relative w-full aspect-[4/5] md:aspect-auto md:h-[650px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-[0_20px_50px_rgba(57,52,45,0.15)] border border-[#B58A3A]/20 gsap-image-reveal">
             <img 
               src="/founder.webp" 
-              alt="MD. Sharifuddin - Founder of Zencraft" 
+              alt="MD. Sharifuddin - Founder of The Zencraft" 
               className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000"
             />
             {/* Soft inner shadow */}
@@ -314,13 +314,13 @@ const AboutPage: React.FC = () => {
 
             <div className="gsap-fade-up space-y-6 text-sm md:text-base text-[#8A8175] leading-relaxed font-light mb-10 max-w-xl">
               <p>
-                With a profound appreciation for modern minimalism and timeless elegance, Sharifuddin founded Zencraft to bridge the gap between rigorous architectural precision and intimate, highly livable design.
+                With a profound appreciation for modern minimalism and timeless elegance, Sharifuddin founded The Zencraft to bridge the gap between rigorous architectural precision and intimate, highly livable design.
               </p>
               <p>
                 His unique background gives him an analytical yet deeply empathetic approach to interiors—treating every room as an ecosystem where form, function, and flow must exist in perfect, uninterrupted harmony. 
               </p>
               <p>
-                Under his creative direction, Zencraft has grown into a studio known for delivering spaces that feel exceptionally tailored, deeply personal, and uncompromisingly luxurious.
+                Under his creative direction, The Zencraft has grown into a studio known for delivering spaces that feel exceptionally tailored, deeply personal, and uncompromisingly luxurious.
               </p>
             </div>
 

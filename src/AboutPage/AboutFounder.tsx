@@ -10,7 +10,7 @@ const AboutFounder: React.FC = () => {
           {/* Professional Founder Portrait Placeholder */}
           <img 
             src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1000&auto=format&fit=crop" 
-            alt="MD. Sharifuddin - Founder of Zencraft" 
+            alt="MD. Sharifuddin - Founder of The Zencraft" 
             className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
           />
           {/* Subtle inner border to ground the image */}
@@ -41,13 +41,13 @@ const AboutFounder: React.FC = () => {
           {/* Bio Content */}
           <div className="space-y-6 text-sm md:text-base text-white/70 leading-relaxed font-light mb-8">
             <p>
-              With a profound appreciation for modern minimalism and timeless elegance, Karthik founded Zencraft to bridge the gap between architectural precision and intimate, livable design.
+              With a profound appreciation for modern minimalism and timeless elegance, Karthik founded The Zencraft to bridge the gap between architectural precision and intimate, livable design.
             </p>
             <p>
               His unique background gives him a highly analytical approach to interiors—treating every room as an ecosystem where form, function, and flow must exist in perfect, uninterrupted harmony. 
             </p>
             <p>
-              Under his creative direction, Zencraft has grown into a studio known for delivering spaces that feel exceptionally tailored, deeply personal, and uncompromisingly luxurious.
+              Under his creative direction, The Zencraft has grown into a studio known for delivering spaces that feel exceptionally tailored, deeply personal, and uncompromisingly luxurious.
             </p>
           </div>
 

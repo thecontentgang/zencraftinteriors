@@ -32,7 +32,7 @@ const AboutHero: React.FC = () => {
 
         {/* Subtitle: Focus on Storytelling and Precision */}
         <p className="text-sm md:text-base text-white/70 font-light leading-relaxed max-w-2xl mb-10 md:mb-12 px-4 md:px-0">
-          At Zencraft, we believe a home is more than an address; it is a meticulously curated sanctuary where architectural precision meets the poetic rhythm of your life. We don't just build rooms; we craft your legacy.
+          At The Zencraft, we believe a home is more than an address; it is a meticulously curated sanctuary where architectural precision meets the poetic rhythm of your life. We don't just build rooms; we craft your legacy.
         </p>
         
         {/* 3. Call to Action - Connected to Modal */}
@@ -52,7 +52,7 @@ const AboutHero: React.FC = () => {
         <div className="aspect-[4/5] sm:aspect-video md:aspect-[21/9] w-full relative overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&w=2000&auto=format&fit=crop"
-            alt="Zencraft Bespoke Interior"
+            alt="The Zencraft Bespoke Interior"
             className="w-full h-full object-cover scale-105 animate-[image-scale_10s_ease-out_forwards]"
           />
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[var(--color-primary)]/80 to-transparent pointer-events-none" />

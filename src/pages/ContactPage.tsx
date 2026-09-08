@@ -190,7 +190,7 @@ const ContactPage: React.FC = () => {
             >
               <img
                 src="/ramakrishna/ramakrishna-img-10.webp"
-                alt="Zencraft Studio"
+                alt="The Zencraft Studio"
                 className="image-inner w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-[transform,filter] duration-700"
               />
               <div className="absolute inset-0 bg-black/10 pointer-events-none" />
@@ -310,7 +310,7 @@ const ContactPage: React.FC = () => {
         <div className="reveal-group w-full mt-10">
           <div className="image-wrapper w-full h-[400px] md:h-[500px] rounded-[2rem] overflow-hidden border border-primary/10 shadow-2xl relative" style={{ transitionDelay: '0.2s' }}>
             <iframe
-              title="Zencraft Studio Location Map"
+              title="The Zencraft Studio Location Map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.611814638222!2d78.40662157684555!3d17.430407158952537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb917e96b5aacb%3A0x47e107554558a8c1!2sThe%20Zencraft%20Interiors!5e0!3m2!1sen!2sin!4v1788435247334!5m2!1sen!2sin"
               width="100%"
               height="100%"

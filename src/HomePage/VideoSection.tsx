@@ -148,7 +148,7 @@ export default function VideoShowcaseSection() {
               
               <div className="flex flex-col items-center justify-center">
                 <div className="flex items-start">
-                  <span className="text-xl sm:text-2xl md:text-4xl font-karlen text-text-primary leading-none tracking-tight">480</span>
+                  <span className="text-xl sm:text-2xl md:text-4xl font-karlen text-text-primary leading-none tracking-tight">430</span>
                   <span className="text-transparent bg-clip-text bg-gradient-to-b from-primary to-primary/80 text-xs sm:text-sm md:text-xl font-karlen ml-0.5">+</span>
                 </div>
                 <p className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] text-text-secondary mt-1.5 md:mt-2 font-body font-semibold">Completed Projects</p>

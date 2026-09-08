@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src="/footer-bg.png"
-            alt="Zencraft Architecture Background"
+            alt="The Zencraft Architecture Background"
             className="w-full h-full object-cover object-center"
           />
 
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
             <div className="footer-content-el flex flex-col items-center justify-center text-center pb-8">
               <img
                 src="/logo.png"
-                alt="Zencraft Logo"
+                alt="The Zencraft Logo"
                 className="w-24 sm:w-28 md:w-32 h-auto object-contain drop-shadow-lg"
               />
 
@@ -242,7 +242,7 @@ const Footer: React.FC = () => {
             {/* MOBILE / TABLET LEGAL */}
             <div className="footer-content-el w-full flex flex-col items-center justify-center gap-4 text-center text-[8px] sm:text-[9px] font-bold tracking-[0.18em] uppercase text-light-muted/50 pt-7 border-t border-background/10">
               <span>
-                {new Date().getFullYear()} © ZENCRAFT INTERIORS.
+                {new Date().getFullYear()} © THE ZENCRAFT INTERIORS.
                 <br className="sm:hidden" /> ALL RIGHTS RESERVED.
               </span>
 
@@ -339,7 +339,7 @@ const Footer: React.FC = () => {
               <div className="col-span-4 flex flex-col items-center justify-center text-center my-6">
                 <img
                   src="/logo.png"
-                  alt="Zencraft Logo"
+                  alt="The Zencraft Logo"
                   className="w-24 md:w-32 h-auto object-contain drop-shadow-lg"
                 />
               </div>
@@ -355,11 +355,26 @@ const Footer: React.FC = () => {
                 </p>
 
                 <div className="flex flex-col gap-1 text-xs md:text-sm font-light text-light-muted/80">
-                  <a href="tel:+919573287143" className="hover:text-gold transition-colors">
-                    +91 95732 87143
+
+
+                  <a
+                    href="tel:+91910627282"
+                    className="hover:text-gold transition-colors"
+                  >
+                    +91 91096 27282
                   </a>
 
-                  <a href="mailto:Enquiry@thezencraftinteriors.com" className="hover:text-gold transition-colors">
+                  <a
+                    href="tel:+919063192671"
+                    className="hover:text-gold transition-colors"
+                  >
+                    +91 90631 92671
+                  </a>
+
+                  <a
+                    href="mailto:Enquiry@thezencraftinteriors.com"
+                    className="hover:text-gold transition-colors"
+                  >
                     Enquiry@thezencraftinteriors.com
                   </a>
                 </div>
@@ -387,7 +402,7 @@ const Footer: React.FC = () => {
             {/* DESKTOP LEGAL ROW */}
             <div className="footer-content-el w-full flex flex-col md:flex-row items-center justify-between gap-4 text-[9px] md:text-[10px] font-bold tracking-[0.2em] uppercase text-light-muted/60 pt-6 border-t border-background/10 mt-12">
               <span>
-                {new Date().getFullYear()} © ZENCRAFT INTERIORS. ALL RIGHTS RESERVED.
+                {new Date().getFullYear()} © THE ZENCRAFT INTERIORS. ALL RIGHTS RESERVED.
               </span>
 
               <span>
@@ -440,7 +455,7 @@ const Footer: React.FC = () => {
               <p>
                 At{' '}
                 <strong className="text-text-primary">
-                  Zencraft Interiors
+                  The Zencraft Interiors
                 </strong>
                 , your privacy and the confidentiality of your home are our highest priorities. This Privacy Policy outlines how we handle your personal data and project details.
               </p>
@@ -470,7 +485,7 @@ const Footer: React.FC = () => {
                 4. Data Security
               </h4>
               <p>
-                Digital files, 3D renders, and client communications are stored securely on our encrypted servers. Access is restricted exclusively to the Zencraft team members directly involved in your project.
+                Digital files, 3D renders, and client communications are stored securely on our encrypted servers. Access is restricted exclusively to The Zencraft team members directly involved in your project.
               </p>
             </div>
 

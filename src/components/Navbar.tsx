@@ -112,8 +112,8 @@ export default function PremiumNavbar() {
             <a href="/" onClick={() => setIsOpen(false)} className="block py-1">
               <img
                 src="/logo.png"
-                alt="Zencraft Logo"
-                className={`w-auto object-contain transition-all duration-500 ease-out hover:scale-105 active:scale-95 ${isScrolledPastHero && !isOpen ? 'h-22 sm:h-20 md:h-24' : 'h-24 sm:h-32 md:h-32'
+                alt="The Zencraft Logo"
+                className={`w-auto object-contain transition-all duration-500 ease-out hover:scale-105 active:scale-95 ${isScrolledPastHero && !isOpen ? 'h-24 sm:h-26 md:h-28' : 'h-26 sm:h-32 md:h-36'
                   }`}
               />
             </a>

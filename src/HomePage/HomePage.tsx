@@ -10,6 +10,7 @@ import InstagramSection from './Instagram';
 import WhyChooseUsSection from '../HomePage/WhyChooseUs';
 import VideoShowcaseSection from './VideoSection';
 import CtaSection from './CtaSection';
+import RenderVsReality from './RenderVsReality';
 
 const Home = () => {
 
@@ -72,6 +73,7 @@ const Home = () => {
 
         <VideoShowcaseSection />
         <AboutSection />
+        <RenderVsReality />
         <ProjectsSection />
         <ServicesSection />
         <WhyChooseUsSection />

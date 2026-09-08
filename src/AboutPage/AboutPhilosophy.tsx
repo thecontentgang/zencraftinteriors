@@ -55,7 +55,7 @@ const AboutPhilosophy: React.FC = () => {
           {/* Body Text */}
           <div className="space-y-6 text-sm md:text-base text-white/70 leading-relaxed font-light mb-10 max-w-xl">
             <p>
-              At Zencraft, we believe that true luxury is not defined by excess, but by intention. Every texture we select, every light we place, and every layout we draft is rooted in a deep understanding of how you live and interact with your environment.
+              At The Zencraft, we believe that true luxury is not defined by excess, but by intention. Every texture we select, every light we place, and every layout we draft is rooted in a deep understanding of how you live and interact with your environment.
             </p>
             <p>
               Our approach marries timeless architectural principles with modern sensibilities. We don't just decorate rooms; we sculpt sanctuaries that reflect your personal narrative, creating a seamless harmony between aesthetics and functionality.

@@ -119,7 +119,7 @@ export default function HeroSection() {
             {/* Stat 2 */}
             <div className="flex-1 flex flex-col items-center justify-center">
               <div className="flex items-start">
-                <span className="text-2xl sm:text-4xl md:text-5xl font-karlen text-text-primary leading-none tracking-tight">15</span>
+                <span className="text-2xl sm:text-4xl md:text-5xl font-karlen text-text-primary leading-none tracking-tight">10</span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-b from-primary to-secondary text-[9px] sm:text-xs md:text-sm font-body font-semibold tracking-widest uppercase ml-1 mt-0.5 md:mt-1">Yrs</span>
               </div>
               <span className="text-[7px] sm:text-[9px] md:text-[10px] font-body tracking-[0.15em] sm:tracking-[0.2em] uppercase text-text-secondary/70 mt-1.5 md:mt-3 text-center">

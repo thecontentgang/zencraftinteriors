@@ -82,9 +82,7 @@ const projectDetailsData = {
       '/dharmateja/dharmateja-img-5.webp',
       '/dharmateja/dharmateja-img-6.webp',
       '/dharmateja/dharmateja-img-7.webp',
-      '/dharmateja/dharmateja-img-8.webp',
-      '/dharmateja/dharmateja-img-9.webp',
-      '/dharmateja/dharmateja-img-10.webp'
+
     ],
     nextProjectSlug: 'bharani',
     nextProjectName: 'Bharani'

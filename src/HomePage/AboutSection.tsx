@@ -77,7 +77,7 @@ const AboutSection: React.FC = () => {
           <div className="about-el relative rounded-[2rem] overflow-hidden min-h-[320px] md:min-h-0 shadow-[0_15px_40px_rgba(57,52,45,0.08)] group">
             <img 
               src="/praveen-VRE/praveen-img-9.webp" 
-              alt="Zencraft Interior Detail" 
+              alt="The Zencraft Interior Detail" 
               className="absolute inset-0 w-full h-full object-cover grayscale-[10%]"
               loading="lazy"
             />
@@ -94,7 +94,7 @@ const AboutSection: React.FC = () => {
               <span className="text-[10px] tracking-[0.2em] text-gold uppercase font-bold block mb-4">02 / IMPACT</span>
               <div className="space-y-6">
                 <div>
-                  <span className="block text-4xl font-karlen text-white mb-0.5">480+</span>
+                  <span className="block text-4xl font-karlen text-white mb-0.5">430+</span>
                   <span className="text-[10px] tracking-[0.15em] uppercase text-white/60 font-mono">Spaces Crafted</span>
                 </div>
                 <div>
