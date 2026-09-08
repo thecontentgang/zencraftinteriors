@@ -30,8 +30,8 @@ const projects: Project[] = [
     num: '01',
     name: 'Sumith',
     location: 'Hyderabad',
-    leftImage: '/sumith-AZ/sumith-img-2.webp',
-    rightImage: '/sumith-AZ/sumith-img-1.webp',
+    leftImage: '/sumith-AZ/sumith-img-1.webp',
+    rightImage: '/sumith-AZ/sumith-img-11.webp',
     leftCaption: 'The Gathering Space — Sandblasted limestone meets century-old reclaimed teak.',
     rightCaption: 'The Master Suite — Crafted for light, shadow, and quiet afternoons.'
   },
@@ -41,7 +41,7 @@ const projects: Project[] = [
     name: 'Prudhvi - Bollineni Bion',
     location: 'Hyderabad',
     leftImage: '/prudhvi-bion/prudhvi-img-2.webp',
-    rightImage: '/prudhvi-bion/prudhvi-img-1.webp',
+    rightImage: '/prudhvi-bion/prudhvi-img-11.webp',
     leftCaption: 'The Grand Lounge — Floating silk screens balancing monolithic travertine walls.',
     rightCaption: 'The Sanctuary — Plaster ceilings, wool textiles, and a gentle ambient glow.'
   },
@@ -60,7 +60,7 @@ const projects: Project[] = [
     num: '04',
     name: 'Dharmateja',
     location: 'Hyderabad',
-    leftImage: '/dharmateja/dharmateja-img-2.webp',
+    leftImage: '/dharmateja/dharmateja-img-3.webp',
     rightImage: '/dharmateja/dharmateja-img-1.webp',
     leftCaption: 'The Ambient Living Area — Warm textures layered over precise architectural lines.',
     rightCaption: 'The Bespoke Dining — Custom millwork tailored for intimate evening gatherings.'

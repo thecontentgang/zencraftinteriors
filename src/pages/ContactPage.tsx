@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { MapPin, Phone, Mail} from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
 // Custom Instagram SVG Icon
 const InstagramIcon = ({ size = 24, strokeWidth = 2, className = "" }) => (
@@ -147,38 +147,38 @@ const ContactPage: React.FC = () => {
 
               {/* Direct Lines */}
               <div className="slide-up-fade flex flex-col gap-6" style={{ transitionDelay: '0.1s' }}>
-  <h3 className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[#39342D]/60">
-    Direct Lines
-  </h3>
-  
-  <div className="flex flex-col gap-4 text-sm md:text-base text-[#39342D]/80 font-light">
-    
-    {/* Phone 1 */}
-    <a href="tel:+919109627282" className="flex items-center gap-3.5 group">
-      <div className="w-9 h-9 rounded-full bg-[#B58A3A]/10 border border-[#B58A3A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#B58A3A] group-hover:text-[#F8F5EE] transition-all duration-300">
-        <Phone className="w-4 h-4 text-[#B58A3A] group-hover:text-[#F8F5EE] transition-colors" />
-      </div>
-      <span className="hover:text-[#B58A3A] transition-colors">+91 91096 27282</span>
-    </a>
+                <h3 className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-[#39342D]/60">
+                  Direct Lines
+                </h3>
 
-    {/* Phone 2 */}
-    <a href="tel:+919063192671" className="flex items-center gap-3.5 group">
-      <div className="w-9 h-9 rounded-full bg-[#B58A3A]/10 border border-[#B58A3A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#B58A3A] group-hover:text-[#F8F5EE] transition-all duration-300">
-        <Phone className="w-4 h-4 text-[#B58A3A] group-hover:text-[#F8F5EE] transition-colors" />
-      </div>
-      <span className="hover:text-[#B58A3A] transition-colors">+91 90631 92671</span>
-    </a>
+                <div className="flex flex-col gap-4 text-sm md:text-base text-[#39342D]/80 font-light">
 
-    {/* Email */}
-    <a href="mailto:enquiry@thezencraftinteriors.com" className="flex items-center gap-3.5 group">
-      <div className="w-9 h-9 rounded-full bg-[#B58A3A]/10 border border-[#B58A3A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#B58A3A] group-hover:text-[#F8F5EE] transition-all duration-300">
-        <Mail className="w-4 h-4 text-[#B58A3A] group-hover:text-[#F8F5EE] transition-colors" />
-      </div>
-      <span className="hover:text-[#B58A3A] transition-colors break-all">enquiry@thezencraftinteriors.com</span>
-    </a>
+                  {/* Phone 1 */}
+                  <a href="tel:+919109627282" className="flex items-center gap-3.5 group">
+                    <div className="w-9 h-9 rounded-full bg-[#B58A3A]/10 border border-[#B58A3A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#B58A3A] group-hover:text-[#F8F5EE] transition-all duration-300">
+                      <Phone className="w-4 h-4 text-[#B58A3A] group-hover:text-[#F8F5EE] transition-colors" />
+                    </div>
+                    <span className="hover:text-[#B58A3A] transition-colors">+91 91096 27282</span>
+                  </a>
 
-  </div>
-</div>
+                  {/* Phone 2 */}
+                  <a href="tel:+919063192671" className="flex items-center gap-3.5 group">
+                    <div className="w-9 h-9 rounded-full bg-[#B58A3A]/10 border border-[#B58A3A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#B58A3A] group-hover:text-[#F8F5EE] transition-all duration-300">
+                      <Phone className="w-4 h-4 text-[#B58A3A] group-hover:text-[#F8F5EE] transition-colors" />
+                    </div>
+                    <span className="hover:text-[#B58A3A] transition-colors">+91 90631 92671</span>
+                  </a>
+
+                  {/* Email */}
+                  <a href="mailto:enquiry@thezencraftinteriors.com" className="flex items-center gap-3.5 group">
+                    <div className="w-9 h-9 rounded-full bg-[#B58A3A]/10 border border-[#B58A3A]/20 flex items-center justify-center shrink-0 group-hover:bg-[#B58A3A] group-hover:text-[#F8F5EE] transition-all duration-300">
+                      <Mail className="w-4 h-4 text-[#B58A3A] group-hover:text-[#F8F5EE] transition-colors" />
+                    </div>
+                    <span className="hover:text-[#B58A3A] transition-colors break-all">enquiry@thezencraftinteriors.com</span>
+                  </a>
+
+                </div>
+              </div>
 
               {/* Business Hours & Socials */}
               <div className="slide-up-fade flex gap-4" style={{ transitionDelay: '0.2s' }}>
